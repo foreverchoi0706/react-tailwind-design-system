@@ -1,13 +1,13 @@
 import { useState, useCallback } from "react";
 
 const useFlag = (initialState: boolean = false): [boolean, () => void] => {
- const [flag, setFlag] = useState<boolean>(initialState);
+  const [flag, setFlag] = useState<boolean>(initialState);
 
- const handleClickFlag = useCallback(() => {
-  setFlag((prevState) => !prevState);
- }, []);
+  const handleClickFlag = useCallback(() => {
+    setFlag((prevState) => !prevState);
+  }, []);
 
- return [flag, handleClickFlag];
+  return [flag, handleClickFlag];
 };
 
 export default useFlag;

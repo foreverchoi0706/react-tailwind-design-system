@@ -1,19 +1,21 @@
 import {
- createElement,
- ElementType,
- FC,
- memo,
- PropsWithChildren,
- HTMLProps,
- HTMLAttributes,
+  createElement,
+  ElementType,
+  FC,
+  memo,
+  PropsWithChildren,
+  HTMLProps,
+  HTMLAttributes,
 } from "react";
 
 export type TProps = { as?: ElementType } & PropsWithChildren<
- HTMLProps<HTMLAttributes<HTMLElement>>
+  HTMLProps<HTMLAttributes<HTMLElement>>
 >;
 
 const Element: FC<TProps> = ({ as = "div", ...rest }) => {
- return createElement(as, rest);
+  console.log(rest);
+
+  return createElement(as, rest);
 };
 
 export default memo(Element);

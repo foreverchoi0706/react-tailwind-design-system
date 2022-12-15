@@ -6,20 +6,20 @@ import Gnb from "@/components/organisms/Gnb";
 import "./index.css";
 
 function App() {
- return (
-  <BrowserRouter>
-   <Layout.Box className="max-w-7xl my-0 mx-auto">
-    <Gnb />
-    <Layout.Box className="px-3">
-     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/*" element={<Navigate to="/" replace />} />
-     </Routes>
-    </Layout.Box>
-   </Layout.Box>
-  </BrowserRouter>
- );
+  return (
+    <BrowserRouter>
+      <Layout.Box className="my-0 mx-auto max-w-7xl">
+        <Gnb />
+        <Layout.Box className="px-3">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout.Box>
+      </Layout.Box>
+    </BrowserRouter>
+  );
 }
 
 export default App;
