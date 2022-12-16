@@ -5,11 +5,10 @@ import {
   memo,
   PropsWithChildren,
   HTMLProps,
-  HTMLAttributes,
 } from "react";
 
 export type TProps = { as?: ElementType } & PropsWithChildren<
-  HTMLProps<HTMLAttributes<HTMLElement>>
+  HTMLProps<HTMLElement>
 >;
 
 const Element: FC<TProps> = ({ as = "div", ...rest }) => {

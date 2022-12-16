@@ -10,12 +10,8 @@ const Secondary: FC<TProps> = ({ children, ...rest }) => {
 };
 
 export default Object.assign(
-  ({ children, ...rest }: TProps) => {
-    return (
-      <Element as="p" {...rest}>
-        {children}
-      </Element>
-    );
+  (props: TProps) => {
+    return <Element as="p" {...props} />;
   },
   {
     Primary,

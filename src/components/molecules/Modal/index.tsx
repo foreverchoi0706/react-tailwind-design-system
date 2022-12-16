@@ -1,9 +1,8 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useCallback } from "react";
 import Element, { TProps } from "@/components/atoms/Element";
 import {
   createContext,
   FC,
-  MouseEventHandler,
   PropsWithChildren,
   useContext,
   useEffect,
@@ -11,7 +10,7 @@ import {
 import { createPortal } from "react-dom";
 
 interface IModalContext {
-  onClose?: MouseEventHandler<HTMLAttributes<HTMLDivElement>>;
+  onClose?: () => void;
 }
 
 const ModalContext = createContext<IModalContext>({
@@ -21,7 +20,7 @@ const ModalContext = createContext<IModalContext>({
 const Contents: FC<TProps> = (props) => {
   return (
     <Element
-      className=" border-r-5 relative z-50 w-96 rounded-lg border-2 border-gray-200 bg-white p-10"
+      className="border-r-5 relative z-50 w-96 rounded-md border-2 border-gray-200 bg-white p-10"
       {...props}
     />
   );
@@ -65,14 +64,22 @@ const Overlay: FC<TProps> = (props) => {
 export default Object.assign(
   ({ onClose, ...rest }: PropsWithChildren<IModalContext>) => {
     const modal = document.querySelector("#modal");
+
     if (!modal) {
       console.error("modal element does not exist");
       return null;
     }
 
+    const handleKeydown = useCallback((e: KeyboardEvent) => {
+      if (e.key !== "Escape" || !onClose) return;
+      onClose();
+    }, []);
+
     useEffect(() => {
+      window.addEventListener("keydown", handleKeydown);
       window.document.body.style.overflow = "hidden";
       return () => {
+        window.removeEventListener("keydown", handleKeydown);
         window.document.body.style.overflow = "auto";
       };
     }, []);

@@ -1,10 +1,11 @@
 import {
   createContext,
+  DetailedHTMLProps,
   FC,
+  InputHTMLAttributes,
   PropsWithChildren,
   useContext,
   useId,
-  useMemo,
 } from "react";
 import { useFormContext } from "react-hook-form";
 import Element, { TProps } from "@/components/atoms/Element";
@@ -30,7 +31,9 @@ const Field: FC<PropsWithChildren<IFieldContext>> = ({ children, ...rest }) => {
   );
 };
 
-const Input: FC = () => {
+const Input: FC<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+> = (props) => {
   const { id, name } = useContext(FieldContext);
   const { register } = useFormContext();
   return (
@@ -39,6 +42,7 @@ const Input: FC = () => {
       className="w-full rounded-md border-2 border-solid border-gray-100 p-3 outline-none"
       {...register(name)}
       id={id}
+      {...props}
     />
   );
 };
@@ -64,7 +68,12 @@ const Select: FC = () => {
 };
 
 export default Object.assign(
-  ({ ...rest }: TProps) => {
+  ({
+    ...rest
+  }: DetailedHTMLProps<
+    React.FormHTMLAttributes<HTMLFormElement>,
+    HTMLFormElement
+  >) => {
     return <Element as="form" {...rest} />;
   },
   {

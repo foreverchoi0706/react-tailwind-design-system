@@ -11,7 +11,8 @@ const Flex: FC<TProps> = (props) => {
 };
 
 const Grid: FC<TProps> = (props) => {
-  return <Element className="grid" {...props} />;
+  const className = props.className + " grid";
+  return <Element {...{ ...props, className }} />;
 };
 
 const List: FC<TProps> = (props) => {

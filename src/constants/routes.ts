@@ -8,7 +8,7 @@ const ROUTES = [
         pathname: "HOME"
     }, {
         Component: About,
-        path: "/about",
+        path: "/about/:id",
         pathname: "About"
 
     }
