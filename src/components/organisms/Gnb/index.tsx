@@ -1,16 +1,21 @@
 import { FC, memo } from "react";
+import ROUTES from "@/constants/routes";
 import Layout from "@/components/molecules/Layout";
 
-const Gnb: FC = () => {
+interface IProps {
+  routes: typeof ROUTES;
+}
+
+const Gnb: FC<IProps> = ({ routes }) => {
   return (
-    <Layout.Box className="p-3">
+    <Layout className="p-3">
       <Layout.List className="flex justify-between">
-        <Layout.ListItem>sad</Layout.ListItem>
-        <Layout.ListItem>sad</Layout.ListItem>
-        <Layout.ListItem>sad</Layout.ListItem>
-        <Layout.ListItem>sad</Layout.ListItem>
+        {routes.map((route, index) => (
+          <Layout.ListItem key={index}>{route.pathname}</Layout.ListItem>
+        ))}
+        <Layout.ListItem>로그인</Layout.ListItem>
       </Layout.List>
-    </Layout.Box>
+    </Layout>
   );
 };
 

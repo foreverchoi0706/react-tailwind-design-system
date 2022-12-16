@@ -13,8 +13,6 @@ export type TProps = { as?: ElementType } & PropsWithChildren<
 >;
 
 const Element: FC<TProps> = ({ as = "div", ...rest }) => {
-  console.log(rest);
-
   return createElement(as, rest);
 };
 
