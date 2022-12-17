@@ -20,7 +20,7 @@ const ModalContext = createContext<IModalContext>({
 const Contents: FC<TProps> = (props) => {
   return (
     <Element
-      className="border-r-5 relative z-50 w-96 rounded-md border-2 border-gray-200 bg-white p-10"
+      className="border-r-5 relative z-50 w-96 rounded-md border border-gray-200 bg-white p-10"
       {...props}
     />
   );
@@ -45,20 +45,24 @@ const CloseButton: FC<TProps> = (props) => {
 };
 
 const Footer: FC<TProps> = (props) => {
-  return <Element {...props} />;
+  return <Element className="mt-10" {...props} />;
 };
 
 const Header: FC<TProps> = (props) => {
-  return <Element {...props} />;
+  return <Element className="mb-10" {...props} />;
 };
 
 const Overlay: FC<TProps> = (props) => {
   return (
     <Element
-      className="absolute top-0 z-40 h-screen w-screen bg-black opacity-30"
+      className="absolute top-0 z-40 h-screen w-screen bg-black opacity-20"
       {...props}
     />
   );
+};
+
+const Title: FC<TProps> = (props) => {
+  return <Element as="h1" className="text-center" {...props} />;
 };
 
 export default Object.assign(
@@ -94,5 +98,5 @@ export default Object.assign(
       modal
     );
   },
-  { Contents, CloseButton, Body, Footer, Header, Overlay }
+  { Contents, CloseButton, Body, Footer, Header, Overlay, Title }
 );

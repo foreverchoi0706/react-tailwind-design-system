@@ -39,6 +39,7 @@ const Gnb: FC<IProps> = ({ routes }) => {
           <Modal.Overlay />
           <Modal.Contents>
             <Modal.Header>
+              <Modal.Title className="text-start">회원가입</Modal.Title>
               <Modal.CloseButton />
             </Modal.Header>
             <Modal.Body>
@@ -52,6 +53,21 @@ const Gnb: FC<IProps> = ({ routes }) => {
                     <Form.Field name="password">
                       <Form.Label>비밀번호</Form.Label>
                       <Form.Input />
+                    </Form.Field>
+                    <Form.Field name="select">
+                      <Form.Label>기술스택</Form.Label>
+                      <Form.Select
+                        onSelect={() => {
+                          console.log(1);
+                        }}
+                      >
+                        <Form.Option>AAA</Form.Option>
+                        <Form.Option>BBB</Form.Option>
+                        <Form.Option>CCC</Form.Option>
+                        <Form.Option>DDD</Form.Option>
+                        <Form.Option>EEE</Form.Option>
+                        <Form.Option>FFF</Form.Option>
+                      </Form.Select>
                     </Form.Field>
                     <Layout.Flex className="justify-between gap-3">
                       <Button.Primary type="s">로그인</Button.Primary>

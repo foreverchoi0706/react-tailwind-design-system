@@ -1,5 +1,5 @@
 import Element, { TProps } from "@/components/atoms/Element";
-import { FC, useMemo } from "react";
+import { FC, forwardRef, useMemo } from "react";
 
 const Default: FC<TProps> = (props) => {
   return <Element {...props} />;

@@ -2,7 +2,7 @@ import Element, { TProps } from "@/components/atoms/Element";
 import { FC } from "react";
 
 const Default: FC<TProps> = (props) => {
-  const className = props.className + "  border-2 w-full p-3 rounded-md";
+  const className = props.className + "  border w-full p-3 rounded-md";
   return <Element as="button" {...{ ...props, className }} />;
 };
 
