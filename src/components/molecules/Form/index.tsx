@@ -2,13 +2,15 @@ import {
   createContext,
   DetailedHTMLProps,
   FC,
-  InputHTMLAttributes,
+  forwardRef,
   PropsWithChildren,
   useContext,
   useId,
 } from "react";
-import { useFormContext } from "react-hook-form";
-import Element, { TProps } from "@/components/atoms/Element";
+import Element, {
+  PropsWithAsChildren,
+  TProps,
+} from "@/components/atoms/Element";
 import useFlag from "@/hooks/useFlag";
 
 interface IFieldContext {
@@ -32,33 +34,31 @@ const Field: FC<PropsWithChildren<IFieldContext>> = ({ children, ...rest }) => {
   );
 };
 
-const Input: FC<
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-> = (props) => {
+const Input = forwardRef<
+  HTMLInputElement,
+  PropsWithAsChildren<HTMLInputElement>
+>((props, ref) => {
   const { id, name } = useContext(FieldContext);
-  const { register } = useFormContext();
+  const className =
+    props.className + "  w-full rounded-md border p-3 outline-none";
   return (
     <Element
       as="input"
-      className="w-full rounded-md border p-3 outline-none"
+      ref={ref}
       id={id}
-      {...props}
-      {...register(name)}
+      name={name}
+      {...{ ...props, className }}
     />
   );
-};
+});
 
-const Label: FC<TProps> = (props) => {
+const Label = forwardRef<
+  HTMLLabelElement,
+  PropsWithAsChildren<HTMLLabelElement>
+>((props, ref) => {
   const { id } = useContext(FieldContext);
-  return (
-    <Element
-      as="label"
-      className="absolute -top-2.5 left-2 z-50 bg-white text-gray-500"
-      htmlFor={id}
-      {...props}
-    />
-  );
-};
+  return <Element as="label" htmlFor={id} ref={ref} {...props} />;
+});
 
 const Option: FC<TProps> = (props) => {
   return (

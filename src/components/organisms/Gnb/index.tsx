@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useRef } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -70,7 +70,7 @@ const Gnb: FC<IProps> = ({ routes }) => {
                       </Form.Select>
                     </Form.Field>
                     <Layout.Flex className="justify-between gap-3">
-                      <Button.Primary type="s">로그인</Button.Primary>
+                      <Button.Primary>로그인</Button.Primary>
                       <Button.Disabled onClick={handleClickSignInButton}>
                         취소
                       </Button.Disabled>

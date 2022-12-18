@@ -1,5 +1,8 @@
-import { HTMLAttributes, useCallback } from "react";
-import Element, { TProps } from "@/components/atoms/Element";
+import { forwardRef, HTMLAttributes, useCallback } from "react";
+import Element, {
+  PropsWithAsChildren,
+  TProps,
+} from "@/components/atoms/Element";
 import {
   createContext,
   FC,
@@ -17,18 +20,23 @@ const ModalContext = createContext<IModalContext>({
   onClose: undefined,
 });
 
-const Contents: FC<TProps> = (props) => {
-  return (
-    <Element
-      className="border-r-5 relative z-50 w-96 rounded-md border border-gray-200 bg-white p-10"
-      {...props}
-    />
-  );
-};
+const Contents = forwardRef<HTMLElement, PropsWithAsChildren<HTMLElement>>(
+  (props, ref) => {
+    return (
+      <Element
+        className="border-r-5 relative z-50 w-96 rounded-md border border-gray-200 bg-white p-10"
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
 
-const Body: FC<TProps> = (props) => {
-  return <Element {...props} />;
-};
+const Body = forwardRef<HTMLDivElement, PropsWithAsChildren<HTMLDivElement>>(
+  (props, ref) => {
+    return <Element ref={ref} {...props} />;
+  }
+);
 
 const CloseButton: FC<TProps> = (props) => {
   const { onClose } = useContext(ModalContext);

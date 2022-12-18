@@ -1,24 +1,36 @@
-import Element, { TProps } from "@/components/atoms/Element";
-import { FC } from "react";
+import { forwardRef } from "react";
+import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
 
-const Default: FC<TProps> = (props) => {
+const Default = forwardRef<
+  HTMLButtonElement,
+  PropsWithAsChildren<HTMLButtonElement>
+>((props, ref) => {
   const className = props.className + "  border w-full p-3 rounded-md";
-  return <Element as="button" {...{ ...props, className }} />;
-};
+  return <Element as="button" ref={ref} {...{ ...props, className }} />;
+});
 
-const Disabled: FC<TProps> = (props) => {
+const Disabled = forwardRef<
+  HTMLButtonElement,
+  PropsWithAsChildren<HTMLButtonElement>
+>((props, ref) => {
   const className = props.className + " bg-disabled";
-  return <Default {...{ ...props, className }} />;
-};
+  return <Default ref={ref} {...{ ...props, className }} />;
+});
 
-const Primary: FC<TProps> = (props) => {
+const Primary = forwardRef<
+  HTMLButtonElement,
+  PropsWithAsChildren<HTMLButtonElement>
+>((props, ref) => {
   const className = props.className + " bg-primary";
-  return <Default {...{ ...props, className }} />;
-};
+  return <Default ref={ref} {...{ ...props, className }} />;
+});
 
-const Text: FC<TProps> = (props) => {
-  return <Element as="button" {...props} />;
-};
+const Text = forwardRef<
+  HTMLButtonElement,
+  PropsWithAsChildren<HTMLButtonElement>
+>((props, ref) => {
+  return <Element as="button" ref={ref} {...props} />;
+});
 
 export default Object.assign(Default, {
   Disabled,
