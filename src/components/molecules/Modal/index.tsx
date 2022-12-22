@@ -63,7 +63,7 @@ const Header: FC<TProps> = (props) => {
 const Overlay: FC<TProps> = (props) => {
   return (
     <Element
-      className="absolute top-0 z-40 h-screen w-screen bg-black opacity-20"
+      className="absolute top-0 z-40 h-screen w-screen bg-black opacity-0"
       {...props}
     />
   );

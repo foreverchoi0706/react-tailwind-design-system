@@ -17,7 +17,13 @@ export type PropsWithAsChildren<T = HTMLElement> = {
   as?: ElementType;
 } & PropsWithChildren<DetailedHTMLProps<HTMLAttributes<T>, T>>;
 
-const Element = forwardRef<HTMLElement, PropsWithAsChildren>(
+export type PropsWithAsChildren2<
+  T extends HTMLAttributes<HTMLElement> = HTMLAttributes<HTMLElement>
+> = {
+  as?: ElementType;
+} & PropsWithChildren<T>;
+
+const Element = forwardRef<HTMLElement, PropsWithAsChildren2>(
   ({ as = "div", ...rest }, ref) => {
     return createElement(as, {
       ref,

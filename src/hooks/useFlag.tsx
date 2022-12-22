@@ -1,13 +1,11 @@
-import { useState, useCallback } from "react";
+import { useState, SetStateAction, Dispatch } from "react";
 
-const useFlag = (initialState: boolean = false): [boolean, () => void] => {
+const useFlag = (
+  initialState: boolean = false
+): [boolean, () => void, Dispatch<SetStateAction<boolean>>] => {
   const [flag, setFlag] = useState<boolean>(initialState);
 
-  const handleClickFlag = useCallback(() => {
-    setFlag((prevState) => !prevState);
-  }, []);
-
-  return [flag, handleClickFlag];
+  return [flag, () => setFlag((prevState) => !prevState), setFlag];
 };
 
 export default useFlag;

@@ -18,8 +18,11 @@ const Gnb: FC<IProps> = ({ routes }) => {
 
   const methods = useForm();
 
+  const ref = useRef<HTMLButtonElement>(null);
+
   const handleSubmitForm = useCallback<SubmitHandler<any>>((form) => {
     console.log(form);
+    console.log(ref);
   }, []);
 
   return (
@@ -54,23 +57,8 @@ const Gnb: FC<IProps> = ({ routes }) => {
                       <Form.Label>비밀번호</Form.Label>
                       <Form.Input />
                     </Form.Field>
-                    <Form.Field name="select">
-                      <Form.Label>기술스택</Form.Label>
-                      <Form.Select
-                        onSelect={() => {
-                          console.log(1);
-                        }}
-                      >
-                        <Form.Option>AAA</Form.Option>
-                        <Form.Option>BBB</Form.Option>
-                        <Form.Option>CCC</Form.Option>
-                        <Form.Option>DDD</Form.Option>
-                        <Form.Option>EEE</Form.Option>
-                        <Form.Option>FFF</Form.Option>
-                      </Form.Select>
-                    </Form.Field>
                     <Layout.Flex className="justify-between gap-3">
-                      <Button.Primary>로그인</Button.Primary>
+                      <Button.Primary ref={ref}>로그인</Button.Primary>
                       <Button.Disabled onClick={handleClickSignInButton}>
                         취소
                       </Button.Disabled>
@@ -79,7 +67,6 @@ const Gnb: FC<IProps> = ({ routes }) => {
                 </Form>
               </FormProvider>
             </Modal.Body>
-            <Modal.Footer className="mt-5"></Modal.Footer>
           </Modal.Contents>
         </Modal>
       )}
