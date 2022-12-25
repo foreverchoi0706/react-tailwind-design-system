@@ -5,11 +5,13 @@ const ROUTES = [
     {
         Component: Home,
         path: "/",
-        pathname: "HOME"
+        pathname: "HOME",
+        isShowGnb: true
     }, {
         Component: About,
         path: "/about/:id",
-        pathname: "About"
+        pathname: "About",
+        isShowGnb: false
 
     }
 ] as const;

@@ -3,27 +3,17 @@ import {
   ElementType,
   memo,
   PropsWithChildren,
-  HTMLProps,
-  DetailedHTMLProps,
   forwardRef,
   HTMLAttributes,
 } from "react";
 
-export type TProps = { as?: ElementType } & PropsWithChildren<
-  HTMLProps<HTMLElement>
->;
-
-export type PropsWithAsChildren<T = HTMLElement> = {
-  as?: ElementType;
-} & PropsWithChildren<DetailedHTMLProps<HTMLAttributes<T>, T>>;
-
-export type PropsWithAsChildren2<
+export type PropsWithAsChildren<
   T extends HTMLAttributes<HTMLElement> = HTMLAttributes<HTMLElement>
 > = {
   as?: ElementType;
 } & PropsWithChildren<T>;
 
-const Element = forwardRef<HTMLElement, PropsWithAsChildren2>(
+const Element = forwardRef<HTMLElement, PropsWithAsChildren>(
   ({ as = "div", ...rest }, ref) => {
     return createElement(as, {
       ref,

@@ -22,8 +22,7 @@ const FieldContext = createContext<IFieldContext>({
 
 const Field = forwardRef<
   HTMLDivElement,
-  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> &
-    IFieldContext
+  HTMLAttributes<HTMLDivElement> & IFieldContext
 >(({ children, ...rest }, ref) => {
   const id = useId();
   return (
@@ -37,7 +36,7 @@ const Field = forwardRef<
 
 const Input = forwardRef<
   HTMLInputElement,
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+  InputHTMLAttributes<HTMLInputElement>
 >((props, ref) => {
   const { id, name } = useContext(FieldContext);
   const className =
@@ -47,19 +46,18 @@ const Input = forwardRef<
 
 const Label = forwardRef<
   HTMLLabelElement,
-  DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
+  LabelHTMLAttributes<HTMLLabelElement>
 >((props, ref) => {
   const { id } = useContext(FieldContext);
   return <label htmlFor={id} ref={ref} {...props} />;
 });
 
 export default Object.assign(
-  forwardRef<
-    HTMLFormElement,
-    DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
-  >((props, ref) => {
-    return <form autoComplete="off" ref={ref} {...props} />;
-  }),
+  forwardRef<HTMLFormElement, FormHTMLAttributes<HTMLFormElement>>(
+    (props, ref) => {
+      return <form autoComplete="off" ref={ref} {...props} />;
+    }
+  ),
   {
     Field,
     Input,

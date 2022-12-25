@@ -7,7 +7,7 @@ interface ICard {
 
 const Card: FC<ICard> = ({ index }) => {
   return (
-    <Layout className="h-64 rounded-md border bg-white p-5">
+    <Layout className="rounded-md border bg-white p-5">
       <Layout className="overflow-hidden">
         <img
           className="duration-200 hover:scale-125 hover:opacity-80"

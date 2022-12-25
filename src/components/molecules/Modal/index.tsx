@@ -1,15 +1,11 @@
-import { forwardRef, HTMLAttributes, useCallback } from "react";
-import Element, {
-  PropsWithAsChildren,
-  TProps,
-} from "@/components/atoms/Element";
 import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  useContext,
-  useEffect,
+  ButtonHTMLAttributes,
+  forwardRef,
+  HTMLAttributes,
+  useCallback,
 } from "react";
+import Element from "@/components/atoms/Element";
+import { createContext, PropsWithChildren, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 interface IModalContext {
@@ -20,11 +16,11 @@ const ModalContext = createContext<IModalContext>({
   onClose: undefined,
 });
 
-const Contents = forwardRef<HTMLElement, PropsWithAsChildren<HTMLElement>>(
+const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
-      <Element
-        className="border-r-5 relative z-50 w-96 rounded-md border border-gray-200 bg-white p-10"
+      <div
+        className="border-r-5 relative z-50 h-full w-full rounded-md border border-gray-200 bg-white p-10 md:h-auto md:w-96"
         ref={ref}
         {...props}
       />
@@ -32,46 +28,59 @@ const Contents = forwardRef<HTMLElement, PropsWithAsChildren<HTMLElement>>(
   }
 );
 
-const Body = forwardRef<HTMLDivElement, PropsWithAsChildren<HTMLDivElement>>(
+const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
-    return <Element ref={ref} {...props} />;
+    return <body ref={ref} {...props} />;
   }
 );
 
-const CloseButton: FC<TProps> = (props) => {
+const CloseButton = forwardRef<
+  HTMLButtonElement,
+  ButtonHTMLAttributes<HTMLButtonElement>
+>((props, ref) => {
   const { onClose } = useContext(ModalContext);
   return (
-    <Element
-      as="button"
+    <button
       className="absolute top-4 right-6"
       onClick={onClose}
+      ref={ref}
       {...props}
     >
       X
-    </Element>
+    </button>
   );
-};
+});
 
-const Footer: FC<TProps> = (props) => {
-  return <Element className="mt-10" {...props} />;
-};
+const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
+  (props, ref) => {
+    return <footer className="mb-10" ref={ref} {...props} />;
+  }
+);
 
-const Header: FC<TProps> = (props) => {
-  return <Element className="mb-10" {...props} />;
-};
+const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
+  (props, ref) => {
+    return <header className="mb-10" ref={ref} {...props} />;
+  }
+);
 
-const Overlay: FC<TProps> = (props) => {
-  return (
-    <Element
-      className="absolute top-0 z-40 h-screen w-screen bg-black opacity-0"
-      {...props}
-    />
-  );
-};
+const Overlay = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  (props, ref) => {
+    return (
+      <div
+        className="absolute top-0 z-40 h-screen w-screen bg-black opacity-0"
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
 
-const Title: FC<TProps> = (props) => {
-  return <Element as="h1" className="text-center" {...props} />;
-};
+const Title = forwardRef<
+  HTMLHeadingElement,
+  HTMLAttributes<HTMLHeadingElement>
+>((props, ref) => {
+  return <h1 className="text-center" ref={ref} {...props} />;
+});
 
 export default Object.assign(
   ({ onClose, ...rest }: PropsWithChildren<IModalContext>) => {
@@ -82,16 +91,16 @@ export default Object.assign(
       return null;
     }
 
-    const handleKeydown = useCallback((e: KeyboardEvent) => {
+    const handleKeydownWindow = useCallback((e: KeyboardEvent) => {
       if (e.key !== "Escape" || !onClose) return;
       onClose();
     }, []);
 
     useEffect(() => {
-      window.addEventListener("keydown", handleKeydown);
+      window.addEventListener("keydown", handleKeydownWindow);
       window.document.body.style.overflow = "hidden";
       return () => {
-        window.removeEventListener("keydown", handleKeydown);
+        window.removeEventListener("keydown", handleKeydownWindow);
         window.document.body.style.overflow = "auto";
       };
     }, []);

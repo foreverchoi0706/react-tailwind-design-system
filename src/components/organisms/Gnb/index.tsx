@@ -28,11 +28,13 @@ const Gnb: FC<IProps> = ({ routes }) => {
   return (
     <Layout className="p-3">
       <Layout.List className="flex justify-between">
-        {routes.map((route, index) => (
-          <Layout.ListItem key={index}>
-            <Link to={route.path}>{route.pathname}</Link>
-          </Layout.ListItem>
-        ))}
+        {routes
+          .filter(({ isShowGnb }) => isShowGnb)
+          .map((route, index) => (
+            <Layout.ListItem key={index}>
+              <Link to={route.path}>{route.pathname}</Link>
+            </Layout.ListItem>
+          ))}
         <Layout.ListItem>
           <Button.Text onClick={handleClickSignInButton}>로그인</Button.Text>
         </Layout.ListItem>
@@ -55,7 +57,7 @@ const Gnb: FC<IProps> = ({ routes }) => {
                     </Form.Field>
                     <Form.Field name="password">
                       <Form.Label>비밀번호</Form.Label>
-                      <Form.Input />
+                      <Form.Input type="password" />
                     </Form.Field>
                     <Layout.Flex className="justify-between gap-3">
                       <Button.Primary ref={ref}>로그인</Button.Primary>
