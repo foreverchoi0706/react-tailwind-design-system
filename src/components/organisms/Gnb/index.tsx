@@ -26,7 +26,7 @@ const Gnb: FC<IProps> = ({ routes }) => {
   }, []);
 
   return (
-    <Layout className="p-3">
+    <Layout className="sticky top-0 z-30 bg-white p-3">
       <Layout.List className="flex justify-between">
         {routes
           .filter(({ isShowGnb }) => isShowGnb)

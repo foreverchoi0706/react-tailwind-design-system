@@ -20,7 +20,7 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
       <div
-        className="border-r-5 relative z-50 h-full w-full rounded-md border border-gray-200 bg-white p-10 md:h-auto md:w-96"
+        className="border-r-5 relative h-full w-full rounded-none border border-gray-200 bg-white p-10 md:h-auto md:w-96 md:rounded-md"
         ref={ref}
         {...props}
       />
@@ -67,7 +67,7 @@ const Overlay = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
       <div
-        className="absolute top-0 z-40 h-screen w-screen bg-black opacity-0"
+        className="absolute top-0 -z-10 h-screen w-screen bg-black opacity-40"
         ref={ref}
         {...props}
       />
@@ -108,7 +108,7 @@ export default Object.assign(
     return createPortal(
       <ModalContext.Provider value={{ onClose }}>
         <Element
-          className="fixed top-0 flex h-screen w-screen flex-col items-center justify-center gap-10"
+          className="fixed top-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-10"
           {...rest}
         />
       </ModalContext.Provider>,
