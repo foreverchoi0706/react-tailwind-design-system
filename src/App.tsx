@@ -7,16 +7,14 @@ import "./index.css";
 function App() {
   return (
     <BrowserRouter>
+      <Gnb routes={ROUTES} />
       <Layout className="my-0 mx-auto max-w-7xl">
-        <Gnb routes={ROUTES} />
-        <Layout className="px-3">
-          <Routes>
-            {ROUTES.map(({ path, Component }, index) => (
-              <Route element={<Component />} key={index} path={path} />
-            ))}
-            <Route path="/*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {ROUTES.map(({ path, Component }, index) => (
+            <Route element={<Component />} key={index} path={path} />
+          ))}
+          <Route path="/*" element={<Navigate to="/" replace />} />
+        </Routes>
       </Layout>
     </BrowserRouter>
   );

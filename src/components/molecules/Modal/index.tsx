@@ -30,7 +30,7 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
 const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
-    return <body ref={ref} {...props} />;
+    return <main ref={ref} {...props} />;
   }
 );
 
@@ -98,10 +98,25 @@ export default Object.assign(
 
     useEffect(() => {
       window.addEventListener("keydown", handleKeydownWindow);
-      window.document.body.style.overflow = "hidden";
+      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+
+      console.log(document.body.style.top);
+
       return () => {
         window.removeEventListener("keydown", handleKeydownWindow);
-        window.document.body.style.overflow = "auto";
+
+        const top = parseInt(document.body.style.top || "0");
+        console.log(top);
+
+        if (top) {
+          window.scrollTo(0, top * -1);
+        }
+
+        document.body.style.position = "";
+        document.body.style.width = "";
+        document.body.style.top = "";
       };
     }, []);
 
