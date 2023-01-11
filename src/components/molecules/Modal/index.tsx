@@ -47,13 +47,19 @@ const CloseButton = forwardRef<
 
 const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
-    return <header className="mb-10 p-10" ref={ref} {...props} />;
+    return <header className="p-10" ref={ref} {...props} />;
   }
 );
 
 const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
-    return <main ref={ref} className="px-10" {...props} />;
+    return (
+      <main
+        ref={ref}
+        className="max-h-[calc(100vh-234px)] overflow-y-auto px-10"
+        {...props}
+      />
+    );
   }
 );
 

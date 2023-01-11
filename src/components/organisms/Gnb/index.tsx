@@ -59,6 +59,34 @@ const Gnb: FC<IProps> = ({ routes }) => {
                       <Form.Label>비밀번호</Form.Label>
                       <Form.Input type="password" />
                     </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
+                    <Form.Field name="password">
+                      <Form.Label>비밀번호</Form.Label>
+                      <Form.Input type="password" />
+                    </Form.Field>
                   </Layout.Flex>
                 </Modal.Body>
                 <Modal.Footer>
