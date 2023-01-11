@@ -40,15 +40,17 @@ const Gnb: FC<IProps> = ({ routes }) => {
         </Layout.ListItem>
       </Layout.List>
       {isOpen && (
-        <Modal onClose={handleClickSignInButton}>
-          <Modal.Overlay />
-          <Modal.Contents>
-            <Modal.Header>
-              <Modal.Title className="text-start">회원가입</Modal.Title>
-              <Modal.CloseButton />
-            </Modal.Header>
-            <FormProvider {...methods}>
-              <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
+        <FormProvider {...methods}>
+          <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
+            <Modal onClose={handleClickSignInButton}>
+              <Modal.Overlay />
+
+              <Modal.Contents>
+                <Modal.Header>
+                  <Modal.Title className="text-start">회원가입</Modal.Title>
+                  <Modal.CloseButton />
+                </Modal.Header>
+
                 <Modal.Body>
                   <Layout.Flex className="flex-col gap-10">
                     <Form.Field name="id">
@@ -89,6 +91,7 @@ const Gnb: FC<IProps> = ({ routes }) => {
                     </Form.Field>
                   </Layout.Flex>
                 </Modal.Body>
+
                 <Modal.Footer>
                   <Layout.Flex className="justify-between gap-3">
                     <Button.Primary ref={ref}>로그인</Button.Primary>
@@ -97,10 +100,10 @@ const Gnb: FC<IProps> = ({ routes }) => {
                     </Button.Disabled>
                   </Layout.Flex>
                 </Modal.Footer>
-              </Form>
-            </FormProvider>
-          </Modal.Contents>
-        </Modal>
+              </Modal.Contents>
+            </Modal>
+          </Form>
+        </FormProvider>
       )}
     </Layout>
   );

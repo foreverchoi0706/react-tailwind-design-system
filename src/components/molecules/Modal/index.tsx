@@ -20,7 +20,7 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
       <div
-        className="border-r-5 relative h-full w-full rounded-none border border-gray-200 bg-white  md:h-auto md:w-96 md:rounded-md"
+        className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200 bg-white  md:h-auto md:w-96 md:rounded-md"
         ref={ref}
         {...props}
       />
@@ -47,18 +47,14 @@ const CloseButton = forwardRef<
 
 const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
-    return <header className="bg-gray-100 p-10" ref={ref} {...props} />;
+    return <header className="bg-gray-100 p-6" ref={ref} {...props} />;
   }
 );
 
 const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
     return (
-      <main
-        ref={ref}
-        className="max-h-[calc(100vh-234px)] overflow-y-auto px-10"
-        {...props}
-      />
+      <main ref={ref} className="flex-grow overflow-y-auto px-10" {...props} />
     );
   }
 );
@@ -67,7 +63,7 @@ const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
     return (
       <footer
-        className="fixed bottom-0 w-full bg-gray-100 p-10 md:static"
+        className=" bottom-0 w-full bg-gray-100 p-6 "
         ref={ref}
         {...props}
       />
