@@ -47,9 +47,9 @@ const Gnb: FC<IProps> = ({ routes }) => {
               <Modal.Title className="text-start">회원가입</Modal.Title>
               <Modal.CloseButton />
             </Modal.Header>
-            <Modal.Body>
-              <FormProvider {...methods}>
-                <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
+            <FormProvider {...methods}>
+              <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
+                <Modal.Body>
                   <Layout.Flex className="flex-col gap-10">
                     <Form.Field name="id">
                       <Form.Label>아이디</Form.Label>
@@ -59,16 +59,18 @@ const Gnb: FC<IProps> = ({ routes }) => {
                       <Form.Label>비밀번호</Form.Label>
                       <Form.Input type="password" />
                     </Form.Field>
-                    <Layout.Flex className="justify-between gap-3">
-                      <Button.Primary ref={ref}>로그인</Button.Primary>
-                      <Button.Disabled onClick={handleClickSignInButton}>
-                        취소
-                      </Button.Disabled>
-                    </Layout.Flex>
                   </Layout.Flex>
-                </Form>
-              </FormProvider>
-            </Modal.Body>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Layout.Flex className="justify-between gap-3">
+                    <Button.Primary ref={ref}>로그인</Button.Primary>
+                    <Button.Disabled onClick={handleClickSignInButton}>
+                      취소
+                    </Button.Disabled>
+                  </Layout.Flex>
+                </Modal.Footer>
+              </Form>
+            </FormProvider>
           </Modal.Contents>
         </Modal>
       )}

@@ -20,17 +20,11 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
       <div
-        className="border-r-5 relative h-full w-full rounded-none border border-gray-200 bg-white p-10 md:h-auto md:w-96 md:rounded-md"
+        className="border-r-5 relative h-full w-full rounded-none border border-gray-200 bg-white  md:h-auto md:w-96 md:rounded-md"
         ref={ref}
         {...props}
       />
     );
-  }
-);
-
-const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
-  (props, ref) => {
-    return <main ref={ref} {...props} />;
   }
 );
 
@@ -51,15 +45,27 @@ const CloseButton = forwardRef<
   );
 });
 
-const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
+const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
-    return <footer className="mb-10" ref={ref} {...props} />;
+    return <header className="mb-10 p-10" ref={ref} {...props} />;
   }
 );
 
-const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
+const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
-    return <header className="mb-10" ref={ref} {...props} />;
+    return <main ref={ref} className="px-10" {...props} />;
+  }
+);
+
+const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
+  (props, ref) => {
+    return (
+      <footer
+        className="fixed bottom-0 w-full p-10 md:static"
+        ref={ref}
+        {...props}
+      />
+    );
   }
 );
 
@@ -98,25 +104,10 @@ export default Object.assign(
 
     useEffect(() => {
       window.addEventListener("keydown", handleKeydownWindow);
-      document.body.style.top = `-${window.scrollY}px`;
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-
-      console.log(document.body.style.top);
-
+      document.body.style.overflow = "hidden";
       return () => {
         window.removeEventListener("keydown", handleKeydownWindow);
-
-        const top = parseInt(document.body.style.top || "0");
-        console.log(top);
-
-        if (top) {
-          window.scrollTo(0, top * -1);
-        }
-
-        document.body.style.position = "";
-        document.body.style.width = "";
-        document.body.style.top = "";
+        document.body.style.overflow = "";
       };
     }, []);
 
