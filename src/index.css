@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.modal_wrapper {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: fill-available;
+  background-color: red;
+}

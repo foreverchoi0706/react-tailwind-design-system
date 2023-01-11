@@ -4,7 +4,6 @@ import {
   HTMLAttributes,
   useCallback,
 } from "react";
-import Element from "@/components/atoms/Element";
 import { createContext, PropsWithChildren, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
 
@@ -115,8 +114,8 @@ export default Object.assign(
 
     return createPortal(
       <ModalContext.Provider value={{ onClose }}>
-        <Element
-          className="fixed top-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-10"
+        <div
+          className="modal_wrapper fixed top-0 z-50 flex w-screen flex-col items-center justify-center gap-10"
           {...rest}
         />
       </ModalContext.Provider>,
