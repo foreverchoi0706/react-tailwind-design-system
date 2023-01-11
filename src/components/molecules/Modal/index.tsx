@@ -47,7 +47,7 @@ const CloseButton = forwardRef<
 
 const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
-    return <header className="p-10" ref={ref} {...props} />;
+    return <header className="bg-gray-100 p-10" ref={ref} {...props} />;
   }
 );
 
@@ -67,7 +67,7 @@ const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
     return (
       <footer
-        className="fixed bottom-0 w-full p-10 md:static"
+        className="fixed bottom-0 w-full bg-gray-100 p-10 md:static"
         ref={ref}
         {...props}
       />
