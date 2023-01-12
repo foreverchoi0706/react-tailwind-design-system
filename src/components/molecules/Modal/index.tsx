@@ -6,6 +6,7 @@ import {
 } from "react";
 import { createContext, PropsWithChildren, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
+import styles from "./index.module.css";
 
 interface IModalContext {
   onClose?: () => void;
@@ -115,7 +116,7 @@ export default Object.assign(
     return createPortal(
       <ModalContext.Provider value={{ onClose }}>
         <div
-          className="modal_wrapper fixed top-0 z-50 flex w-screen flex-col items-center justify-center gap-10"
+          className={`${styles.modal_wrapper} fixed top-0 z-50 flex w-screen flex-col items-center justify-center gap-10`}
           {...rest}
         />
       </ModalContext.Provider>,

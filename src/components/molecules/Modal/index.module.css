@@ -1,0 +1,5 @@
+.modal_wrapper {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: stretch;
+}
