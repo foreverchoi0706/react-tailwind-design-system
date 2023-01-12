@@ -52,7 +52,7 @@ const Gnb: FC<IProps> = ({ routes }) => {
                 </Modal.Header>
 
                 <Modal.Body>
-                  <Layout.Flex className="flex-col gap-10">
+                  <Layout.Flex className="h-[500px] flex-col gap-10">
                     <Form.Field name="id">
                       <Form.Label>아이디</Form.Label>
                       <Form.Input autoFocus />
