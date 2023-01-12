@@ -20,7 +20,7 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
       <div
-        className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200 bg-white  md:h-auto md:w-96 md:rounded-md"
+        className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200  bg-white md:h-auto md:w-auto md:rounded-md"
         ref={ref}
         {...props}
       />
