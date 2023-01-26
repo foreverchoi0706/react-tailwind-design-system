@@ -1,6 +1,6 @@
 import { FC, memo, useCallback, useRef } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import ROUTES from "@/constants/routes";
 import Layout from "@/components/molecules/Layout";
@@ -14,6 +14,10 @@ interface IProps {
 }
 
 const Gnb: FC<IProps> = ({ routes }) => {
+  console.log("Gnb");
+
+  const [searchParams] = useSearchParams();
+
   const [isOpen, handleClickSignInButton] = useFlag();
 
   const methods = useForm();
