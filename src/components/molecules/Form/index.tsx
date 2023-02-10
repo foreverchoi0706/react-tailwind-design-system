@@ -12,12 +12,10 @@ import {
 
 interface IFieldContext {
   id?: string;
-  name: string;
 }
 
 const FieldContext = createContext<IFieldContext>({
   id: undefined,
-  name: "",
 });
 
 const Field = forwardRef<
@@ -26,7 +24,7 @@ const Field = forwardRef<
 >(({ children, ...rest }, ref) => {
   const id = useId();
   return (
-    <FieldContext.Provider value={{ ...rest, id: rest.id || id }}>
+    <FieldContext.Provider value={{ id: rest.id || id }}>
       <div className="relative" ref={ref}>
         {children}
       </div>
@@ -38,10 +36,10 @@ const Input = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement>
 >((props, ref) => {
-  const { id, name } = useContext(FieldContext);
+  const { id } = useContext(FieldContext);
   const className =
     props.className + "  w-full rounded-md border p-3 outline-none";
-  return <input ref={ref} id={id} name={name} {...{ ...props, className }} />;
+  return <input ref={ref} id={id} {...{ ...props, className }} />;
 });
 
 const Label = forwardRef<

@@ -1,26 +1,61 @@
+import { FC, useCallback } from "react";
+import {
+  ArrayPath,
+  FormProvider,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
+import Button from "@/components/molecules/Button";
+import Form from "@/components/molecules/Form";
 import Layout from "@/components/molecules/Layout";
-import { FC, MouseEventHandler, useCallback, useRef } from "react";
+
+interface IProfileForm {
+  id: string;
+  pw: string;
+  repw: string;
+}
 
 const About: FC = () => {
-  const ref = useRef<HTMLLIElement>(null);
+  const method = useForm<IProfileForm>({
+    defaultValues: {
+      id: "",
+      pw: "",
+      repw: "",
+    },
+  });
 
-  const handleClick = useCallback<MouseEventHandler<HTMLLIElement>>((e) => {
-    console.log(e.currentTarget.id);
-    console.log(ref);
+  const handleFormSubmit = useCallback<SubmitHandler<IProfileForm>>((e) => {
+    console.log(e);
   }, []);
 
   return (
     <Layout>
-      <Layout.List>
-        <Layout.ListItem
-          id="dsad"
-          ref={ref}
-          onClick={handleClick}
-          className="cursor-pointer bg-red-500"
-        >
-          ssadsadasdsada
-        </Layout.ListItem>
-      </Layout.List>
+      <FormProvider {...method}>
+        <Form onSubmit={method.handleSubmit(handleFormSubmit)}>
+          <Form.Field>
+            <Form.Label>TEST</Form.Label>
+            <Form.Input
+              {...method.register("id", {
+                required: "ID 필수",
+              })}
+              placeholder="id"
+            />
+            <span className="text-red-400">
+              {method.formState.errors["id"]?.message}
+            </span>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>TEST</Form.Label>
+            <Form.Input {...method.register("pw")} placeholder="pw" />
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>TEST</Form.Label>
+            <Form.Input {...method.register("repw")} placeholder="repw" />
+          </Form.Field>
+          <Button type="submit">dasd</Button>
+        </Form>
+      </FormProvider>
     </Layout>
   );
 };

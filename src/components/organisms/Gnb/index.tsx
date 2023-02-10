@@ -57,48 +57,22 @@ const Gnb: FC<IProps> = ({ routes }) => {
 
                 <Modal.Body>
                   <Layout.Flex className="h-[500px] flex-col gap-10">
-                    <Form.Field name="id">
+                    <Form.Field>
                       <Form.Label>아이디</Form.Label>
-                      <Form.Input autoFocus />
+                      <Form.Input {...methods.register("id")} autoFocus />
                     </Form.Field>
-                    <Form.Field name="password">
+                    <Form.Field>
                       <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
-                    </Form.Field>
-                    <Form.Field name="password">
-                      <Form.Label>비밀번호</Form.Label>
-                      <Form.Input type="password" />
+                      <Form.Input {...methods.register("pw")} type="password" />
                     </Form.Field>
                   </Layout.Flex>
                 </Modal.Body>
 
                 <Modal.Footer>
                   <Layout.Flex className="justify-between gap-3">
-                    <Button.Primary ref={ref}>로그인</Button.Primary>
+                    <Button.Primary type="submit" ref={ref}>
+                      로그인
+                    </Button.Primary>
                     <Button.Disabled onClick={handleClickSignInButton}>
                       취소
                     </Button.Disabled>
