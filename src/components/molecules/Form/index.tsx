@@ -25,7 +25,7 @@ const Field = forwardRef<
   const id = useId();
   return (
     <FieldContext.Provider value={{ id: rest.id || id }}>
-      <div className="relative" ref={ref}>
+      <div className={(rest.className += " relative")} {...rest} ref={ref}>
         {children}
       </div>
     </FieldContext.Provider>

@@ -54,7 +54,7 @@ const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
 const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
     return (
-      <main ref={ref} className="flex-grow overflow-y-auto px-10" {...props} />
+      <main ref={ref} className="flex-grow overflow-y-auto px-4" {...props} />
     );
   }
 );
