@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import {
   FormProvider,
   SubmitHandler,
@@ -9,6 +9,8 @@ import Button from "@/components/molecules/Button";
 import Form from "@/components/molecules/Form";
 import Layout from "@/components/molecules/Layout";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export interface IProfileForm {
   id: string;
@@ -21,16 +23,36 @@ export interface IProfileForm {
 
 const About: FC = () => {
   const [text, setText] = useState<string>("");
+
+  const navigate = useNavigate();
   const method = useForm<IProfileForm>({
-    mode: "onSubmit",
     defaultValues: {
       id: "",
       pw: "",
       repw: "",
+      address: [],
     },
   });
 
-  useProfileFormQuery(method);
+  const { isLoading } = useProfileFormQuery(method);
+
+  const { mutate } = useMutation<any, any, IProfileForm>(
+    () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            success: true,
+          });
+        }, 3000);
+      });
+    },
+    {
+      onSuccess: () => {
+        alert(123);
+        navigate("/");
+      },
+    }
+  );
 
   const { fields, append, remove } = useFieldArray<IProfileForm>({
     control: method.control,
@@ -39,16 +61,10 @@ const About: FC = () => {
 
   const handleProfileFormSubmit = useCallback<SubmitHandler<IProfileForm>>(
     (profileForm) => {
-      console.log(profileForm);
+      mutate(profileForm);
     },
     []
   );
-
-  useEffect(() => {
-    const firstError = Object.values(method.formState.errors)[0];
-    if (!firstError || !firstError.ref?.focus) return;
-    firstError.ref.focus();
-  }, [method.formState]);
 
   return (
     <Layout className="max-w-5xl">
@@ -58,6 +74,7 @@ const About: FC = () => {
             <Form.Field>
               <Form.Label>id</Form.Label>
               <Form.Input
+                disabled={isLoading}
                 className={`${
                   method.formState.errors["id"]?.message &&
                   "placeholder:text-red-500"
@@ -71,6 +88,7 @@ const About: FC = () => {
             <Form.Field>
               <Form.Label>pw</Form.Label>
               <Form.Input
+                disabled={isLoading}
                 type="password"
                 {...method.register("pw")}
                 placeholder="pw"
@@ -79,61 +97,19 @@ const About: FC = () => {
             <Form.Field>
               <Form.Label>repw</Form.Label>
               <Form.Input
+                disabled={isLoading}
                 type="password"
                 {...method.register("repw")}
                 placeholder="repw"
-                readOnly
               />
             </Form.Field>
             <Form.Field>
               <Form.Label>pw</Form.Label>
               <Form.Input
+                disabled={isLoading}
                 type="password"
                 {...method.register("pw")}
                 placeholder="pw"
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>repw</Form.Label>
-              <Form.Input
-                type="password"
-                {...method.register("repw")}
-                placeholder="repw"
-                readOnly
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>pw</Form.Label>
-              <Form.Input
-                type="password"
-                {...method.register("pw")}
-                placeholder="pw"
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>repw</Form.Label>
-              <Form.Input
-                type="password"
-                {...method.register("repw")}
-                placeholder="repw"
-                readOnly
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>pw</Form.Label>
-              <Form.Input
-                type="password"
-                {...method.register("pw")}
-                placeholder="pw"
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>repw</Form.Label>
-              <Form.Input
-                type="password"
-                {...method.register("repw")}
-                placeholder="repw"
-                readOnly
               />
             </Form.Field>
             {fields.map((field, index) => (
@@ -182,6 +158,7 @@ const About: FC = () => {
             )}
             <Button type="submit">저장</Button>
           </Layout.Flex>
+          <Layout className="h-[1000px] bg-red-500" />
         </Form>
       </FormProvider>
     </Layout>

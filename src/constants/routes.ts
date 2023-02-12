@@ -1,6 +1,5 @@
 import Home from "@/pages/Home";
 import About from "@/pages/About";
-import Address from "@/pages/Adress";
 
 const ROUTES = [
     {
@@ -16,12 +15,6 @@ const ROUTES = [
         isShowGnb: false
 
     },
-    {
-        Component: Address,
-        path: "/adress",
-        pathname: "adress",
-        isShowGnb: false
-    }
 ] as const;
 
 export default ROUTES;

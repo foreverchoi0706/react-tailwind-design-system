@@ -14,8 +14,6 @@ interface IProps {
 }
 
 const Gnb: FC<IProps> = ({ routes }) => {
-  console.log("Gnb");
-
   const [searchParams] = useSearchParams();
 
   const [isOpen, handleClickSignInButton] = useFlag();
