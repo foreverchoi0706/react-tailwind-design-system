@@ -46,8 +46,8 @@ const About: FC = () => {
 
   useEffect(() => {
     const firstError = Object.values(method.formState.errors)[0];
-    if (!firstError || !firstError?.ref) return;
-     firstError.ref.focus();
+    if (!firstError || !firstError.ref?.focus) return;
+    firstError.ref.focus();
   }, [method.formState]);
 
   return (
