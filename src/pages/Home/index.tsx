@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import Layout from "@/components/atoms/Layout";
+import Text from "@/components/atoms/Text";
 
 const Home: FC = () => {
   return (
@@ -16,7 +17,9 @@ const Home: FC = () => {
                   src="https://i.ytimg.com/vi/bN01WRBS0Ec/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDqr49CxWnwW8Kz5iCIndcAtfBjEg"
                 />
               </Layout>
-              <Layout>{index}</Layout>
+              <Layout>
+                <Text as="strong">{index}</Text>
+              </Layout>
             </Layout>
           </Link>
         ))}
