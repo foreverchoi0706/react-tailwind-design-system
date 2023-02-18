@@ -75,13 +75,6 @@ const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   }
 );
 
-const Title = forwardRef<
-  HTMLHeadingElement,
-  HTMLAttributes<HTMLHeadingElement>
->((props, ref) => {
-  return <h1 className="text-center" ref={ref} {...props} />;
-});
-
 export default Object.assign(
   ({ onClose, ...rest }: PropsWithChildren<IModalContext>) => {
     const modal = document.querySelector("#modal");
@@ -112,5 +105,5 @@ export default Object.assign(
       modal
     );
   },
-  { Contents, CloseButton, Body, Footer, Header, Title }
+  { Contents, CloseButton, Body, Footer, Header }
 );

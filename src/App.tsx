@@ -10,6 +10,7 @@ import { FC, useCallback } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import useFlag from "./hooks/useFlag";
 import { TSignInForm } from "./types/user";
+import Text from "./components/atoms/Text";
 
 const SignInModal: FC<IModalContext> = ({ onClose }) => {
   const methods = useForm<TSignInForm>();
@@ -27,7 +28,7 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
         <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
           <Modal.Contents>
             <Modal.Header>
-              <Modal.Title className="text-start">회원가입</Modal.Title>
+              <Text as="h1">로그인</Text>
               <Modal.CloseButton />
             </Modal.Header>
 
