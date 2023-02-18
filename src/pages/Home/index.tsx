@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import Layout from "@/components/molecules/Layout";
-import Card from "@/components/organisms/Card";
+import Layout from "@/components/atoms/Layout";
 
 const Home: FC = () => {
   return (
@@ -10,7 +9,15 @@ const Home: FC = () => {
       <Layout.Grid className="grid-cols-2 gap-3 lg:grid-cols-4">
         {new Array(50).fill("").map((_, index) => (
           <Link key={index} to={`/about/${index}`}>
-            <Card index={index} />
+            <Layout className="rounded-md border bg-white p-5">
+              <Layout className="overflow-hidden">
+                <img
+                  className="duration-200 hover:scale-125 hover:opacity-80"
+                  src="https://i.ytimg.com/vi/bN01WRBS0Ec/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDqr49CxWnwW8Kz5iCIndcAtfBjEg"
+                />
+              </Layout>
+              <Layout>{index}</Layout>
+            </Layout>
           </Link>
         ))}
       </Layout.Grid>

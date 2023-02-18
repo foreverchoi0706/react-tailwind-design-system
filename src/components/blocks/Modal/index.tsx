@@ -8,7 +8,7 @@ import { createContext, PropsWithChildren, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styles from "./index.module.css";
 
-interface IModalContext {
+export interface IModalContext {
   onClose?: () => void;
 }
 

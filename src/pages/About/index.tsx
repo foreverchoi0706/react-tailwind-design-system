@@ -5,9 +5,9 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import Button from "@/components/molecules/Button";
-import Form from "@/components/molecules/Form";
-import Layout from "@/components/molecules/Layout";
+import Button from "@/components/atoms/Button";
+import Layout from "@/components/atoms/Layout";
+import Form from "@/components/blocks/Form";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
