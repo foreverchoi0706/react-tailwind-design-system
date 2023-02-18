@@ -13,7 +13,6 @@ const ROUTES = [
         path: "/about/:id",
         pathname: "About",
         isShowGnb: false
-
     },
 ] as const;
 

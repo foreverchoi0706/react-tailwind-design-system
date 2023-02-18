@@ -9,20 +9,22 @@ import "./index.css";
 import { FC, useCallback } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import useFlag from "./hooks/useFlag";
+import { TSignInForm } from "./types/user";
 
 const SignInModal: FC<IModalContext> = ({ onClose }) => {
-  const methods = useForm();
+  const methods = useForm<TSignInForm>();
 
-  const handleSubmitForm = useCallback<SubmitHandler<any>>((form) => {
-    console.log(form);
-  }, []);
+  const handleSubmitForm = useCallback<SubmitHandler<TSignInForm>>(
+    (signInForm) => {
+      console.log(signInForm);
+    },
+    []
+  );
 
   return (
-    <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
-        <Modal onClose={onClose}>
-          <Modal.Overlay />
-
+    <Modal onClose={onClose}>
+      <FormProvider {...methods}>
+        <Form onSubmit={methods.handleSubmit(handleSubmitForm)}>
           <Modal.Contents>
             <Modal.Header>
               <Modal.Title className="text-start">회원가입</Modal.Title>
@@ -49,9 +51,9 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
               </Layout.Flex>
             </Modal.Footer>
           </Modal.Contents>
-        </Modal>
-      </Form>
-    </FormProvider>
+        </Form>
+      </FormProvider>
+    </Modal>
   );
 };
 

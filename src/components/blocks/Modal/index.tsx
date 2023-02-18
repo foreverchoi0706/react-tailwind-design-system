@@ -20,10 +20,14 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
     return (
       <div
-        className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200  bg-white md:h-auto md:w-auto md:rounded-md"
-        ref={ref}
-        {...props}
-      />
+        className={`${styles.modal_wrapper} fixed top-0 z-50 flex w-screen flex-col items-center justify-center gap-10`}
+      >
+        <div
+          className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200  bg-white md:h-auto md:w-auto md:rounded-md"
+          ref={ref}
+          {...props}
+        />
+      </div>
     );
   }
 );
@@ -71,18 +75,6 @@ const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   }
 );
 
-const Overlay = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  (props, ref) => {
-    return (
-      <div
-        className="absolute top-0 -z-10 h-screen w-screen bg-black opacity-40"
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-
 const Title = forwardRef<
   HTMLHeadingElement,
   HTMLAttributes<HTMLHeadingElement>
@@ -115,13 +107,10 @@ export default Object.assign(
 
     return createPortal(
       <ModalContext.Provider value={{ onClose }}>
-        <div
-          className={`${styles.modal_wrapper} fixed top-0 z-50 flex w-screen flex-col items-center justify-center gap-10`}
-          {...rest}
-        />
+        {rest.children}
       </ModalContext.Provider>,
       modal
     );
   },
-  { Contents, CloseButton, Body, Footer, Header, Overlay, Title }
+  { Contents, CloseButton, Body, Footer, Header, Title }
 );

@@ -67,7 +67,7 @@ const About: FC = () => {
   );
 
   return (
-    <Layout className="max-w-5xl">
+    <Layout>
       <FormProvider {...method}>
         <Form onSubmit={method.handleSubmit(handleProfileFormSubmit)}>
           <Layout.Flex className="max-w-7xl flex-col gap-4">
@@ -158,7 +158,6 @@ const About: FC = () => {
             )}
             <Button type="submit">저장</Button>
           </Layout.Flex>
-          <Layout className="h-[1000px] bg-red-500" />
         </Form>
       </FormProvider>
     </Layout>
