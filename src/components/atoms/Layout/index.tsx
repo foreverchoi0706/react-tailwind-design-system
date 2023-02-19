@@ -1,5 +1,6 @@
-import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
 import { forwardRef, HTMLAttributes, LiHTMLAttributes } from "react";
+import classNames from "classnames";
+import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
 
 const Default = forwardRef<
   HTMLDivElement,
@@ -11,17 +12,19 @@ const Default = forwardRef<
 const Flex = forwardRef<
   HTMLDivElement,
   PropsWithAsChildren<HTMLAttributes<HTMLDivElement>>
->((props, ref) => {
-  const className = props.className + " flex";
-  return <Element ref={ref} {...{ ...props, className }} />;
+>(({ className, ...rest }, ref) => {
+  return (
+    <Element ref={ref} className={classNames("flex", className)} {...rest} />
+  );
 });
 
 const Grid = forwardRef<
   HTMLDivElement,
   PropsWithAsChildren<HTMLAttributes<HTMLDivElement>>
->((props, ref) => {
-  const className = props.className + " grid";
-  return <Element ref={ref} {...{ ...props, className }} />;
+>(({ className, ...rest }, ref) => {
+  return (
+    <Element ref={ref} className={classNames("grid", className)} {...rest} />
+  );
 });
 
 const List = forwardRef<

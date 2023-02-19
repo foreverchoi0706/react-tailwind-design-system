@@ -1,10 +1,10 @@
+import classNames from "classnames";
 import {
   createContext,
   forwardRef,
   useContext,
   useId,
   FormHTMLAttributes,
-  DetailedHTMLProps,
   LabelHTMLAttributes,
   InputHTMLAttributes,
   HTMLAttributes,
@@ -21,11 +21,11 @@ const FieldContext = createContext<IFieldContext>({
 const Field = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement> & IFieldContext
->(({ children, ...rest }, ref) => {
+>(({ children, className, ...rest }, ref) => {
   const id = useId();
   return (
     <FieldContext.Provider value={{ id: rest.id || id }}>
-      <div className={(rest.className += " relative")} {...rest} ref={ref}>
+      <div className={classNames("relative", className)} ref={ref} {...rest}>
         {children}
       </div>
     </FieldContext.Provider>
@@ -35,11 +35,16 @@ const Field = forwardRef<
 const Input = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement>
->((props, ref) => {
+>(({ className, ...rest }, ref) => {
   const { id } = useContext(FieldContext);
-  const className =
-    props.className + "  w-full rounded-md border p-3 outline-none";
-  return <input ref={ref} id={id} {...{ ...props, className }} />;
+  return (
+    <input
+      ref={ref}
+      id={id}
+      className={classNames("relative", className)}
+      {...rest}
+    />
+  );
 });
 
 const Label = forwardRef<

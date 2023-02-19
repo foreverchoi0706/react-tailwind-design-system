@@ -1,28 +1,46 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
+import classNames from "classnames";
 
 const Default = forwardRef<
   HTMLButtonElement,
   ButtonHTMLAttributes<HTMLButtonElement>
->((props, ref) => {
-  const className =
-    props.className + " border w-full p-3 rounded-md hover:opacity-80";
-  return <button ref={ref} {...{ ...props, className }} />;
+>(({ className, ...rest }, ref) => {
+  return (
+    <button
+      ref={ref}
+      className={classNames(
+        "w-full rounded-md border p-3 hover:opacity-80",
+        className
+      )}
+      {...rest}
+    />
+  );
 });
 
 const Disabled = forwardRef<
   HTMLButtonElement,
   ButtonHTMLAttributes<HTMLButtonElement>
->((props, ref) => {
-  const className = props.className + " bg-disabled";
-  return <Default ref={ref} {...{ ...props, className }} />;
+>(({ className, ...rest }, ref) => {
+  return (
+    <Default
+      ref={ref}
+      className={classNames("bg-disabled", className)}
+      {...rest}
+    />
+  );
 });
 
 const Primary = forwardRef<
   HTMLButtonElement,
   ButtonHTMLAttributes<HTMLButtonElement>
->((props, ref) => {
-  const className = props.className + " bg-primary";
-  return <Default ref={ref} {...{ ...props, className }} />;
+>(({ className, ...rest }, ref) => {
+  return (
+    <Default
+      ref={ref}
+      className={classNames("bg-primary", className)}
+      {...rest}
+    />
+  );
 });
 
 const Text = forwardRef<
