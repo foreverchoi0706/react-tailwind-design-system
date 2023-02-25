@@ -12,6 +12,7 @@ const useProfileFormQuery = (method: UseFormReturn<IProfileForm>) => {
                         id: "foreverchoi",
                         pw: "Tlrksqhrh1!",
                         repw: "Tlrksqhrh1",
+                        education: [1],
                         address: [{
                             value: "조원로 129",
                         }]
