@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import Button from "@/components/atoms/Button";
 import Layout from "@/components/atoms/Layout";
-import Form from "@/components/blocks/Form";
+import Form from "@/components/compounds/Form";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -120,22 +120,13 @@ const About: FC = () => {
                 placeholder="repw"
               />
             </Form.Field>
-            <Form.Field>
-              <Form.Label>pw</Form.Label>
-              <Form.Input
-                disabled={isLoading}
-                type="password"
-                {...method.register("pw")}
-                placeholder="pw"
-              />
-            </Form.Field>
             {fields.map((field, index) => (
-              <Form.Field className="flex justify-end gap-4">
+              <Form.Field key={field.id} className="flex justify-end gap-4">
                 {index === 0 && <Form.Label>주소</Form.Label>}
                 <Form.Input
                   type="text"
                   {...method.register(`address.${index}.value`)}
-                  placeholder="repw"
+                  placeholder={field.value}
                   readOnly
                 />
 
