@@ -27,23 +27,7 @@ const Grid = forwardRef<
   );
 });
 
-const List = forwardRef<
-  HTMLUListElement,
-  PropsWithAsChildren<HTMLAttributes<HTMLUListElement>>
->((props, ref) => {
-  return <Element as="ul" ref={ref} {...props} />;
-});
-
-const ListItem = forwardRef<
-  HTMLLIElement,
-  PropsWithAsChildren<LiHTMLAttributes<HTMLLIElement>>
->((props, ref) => {
-  return <Element as="li" ref={ref} {...props} />;
-});
-
 export default Object.assign(Default, {
   Flex,
   Grid,
-  List,
-  ListItem,
 });
