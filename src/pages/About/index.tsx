@@ -13,6 +13,7 @@ import useProfileFormQuery from "@/hooks/useProfileQuery";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import ReactSelect, { components, OptionProps } from "react-select";
+import Text from "@/components/atoms/Text";
 
 export interface IProfileForm {
   id: string;
@@ -55,8 +56,6 @@ const About: FC = () => {
 
   const { education } = method.watch();
 
-  console.log(education.length);
-
   const { isLoading } = useProfileFormQuery(method);
 
   const { mutate } = useMutation<any, any, IProfileForm>(() => {
@@ -77,7 +76,6 @@ const About: FC = () => {
   const handleProfileFormSubmit = useCallback<SubmitHandler<IProfileForm>>(
     (profileForm) => {
       console.log(profileForm);
-
       mutate(profileForm);
     },
     []
@@ -173,11 +171,9 @@ const About: FC = () => {
                     components={{
                       Option,
                     }}
-                    menuIsOpen={education.length < 2}
                     hideSelectedOptions={false}
                     onChange={(temp) => {
                       console.log(field.value);
-
                       field.onChange(
                         [...temp.values()].map(({ value }) => value)
                       );
@@ -190,7 +186,13 @@ const About: FC = () => {
                   required: "학력을 입력해주세요",
                 }}
               />
-              <em>{method.formState.errors["education"]?.message}</em>
+              <Text.Error
+                ref={(element) => {
+                  console.log(element);
+                }}
+              >
+                {method.formState.errors["education"]?.message}
+              </Text.Error>
             </Form.Field>
             <Button type="submit">저장</Button>
           </Layout.Flex>

@@ -54,7 +54,7 @@ const Label = forwardRef<
   const { id } = useContext(FieldContext);
   return (
     <label
-      className="x absolute -top-3 left-2  bg-white"
+      className="x absolute -top-4 left-2 bg-white"
       htmlFor={id}
       ref={ref}
       {...props}

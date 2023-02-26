@@ -33,7 +33,7 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
             </Modal.Header>
 
             <Modal.Body>
-              <Layout.Flex className="h-[500px] flex-col gap-10">
+              <Layout.Flex className="flex-col gap-10 p-6">
                 <Form.Field>
                   <Form.Label>아이디</Form.Label>
                   <Form.Input {...methods.register("id")} autoFocus />
