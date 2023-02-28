@@ -41,7 +41,7 @@ const Input = forwardRef<
     <input
       ref={ref}
       id={id}
-      className={classNames("relative", className)}
+      className={classNames("h-full w-full rounded-md border p-2", className)}
       {...rest}
     />
   );
@@ -52,7 +52,14 @@ const Label = forwardRef<
   LabelHTMLAttributes<HTMLLabelElement>
 >((props, ref) => {
   const { id } = useContext(FieldContext);
-  return <label htmlFor={id} ref={ref} {...props} />;
+  return (
+    <label
+      className="x absolute -top-4 left-2 bg-white"
+      htmlFor={id}
+      ref={ref}
+      {...props}
+    />
+  );
 });
 
 export default Object.assign(

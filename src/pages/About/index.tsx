@@ -1,5 +1,6 @@
 import { FC, useCallback, useState } from "react";
 import {
+  Controller,
   FormProvider,
   SubmitHandler,
   useFieldArray,
@@ -7,20 +8,38 @@ import {
 } from "react-hook-form";
 import Button from "@/components/atoms/Button";
 import Layout from "@/components/atoms/Layout";
-import Form from "@/components/blocks/Form";
+import Form from "@/components/compounds/Form";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import ReactSelect, { components, OptionProps } from "react-select";
+import Text from "@/components/atoms/Text";
 
 export interface IProfileForm {
   id: string;
   pw: string;
   repw: string;
+  education: number[];
   address: {
     value: string;
   }[];
 }
 
+const EDUCATION_OPTIONS = [
+  { label: "초등학교", value: 1 },
+  { label: "중학교", value: 2 },
+  { label: "고등학교", value: 3 },
+  { label: "대학교", value: 4 },
+];
+
+const Option: FC<OptionProps<any>> = (props) => {
+  return (
+    <components.Option {...props}>
+      <input type="checkbox" checked={props.isSelected} onChange={() => null} />{" "}
+      <label>{props.label}</label>
+    </components.Option>
+  );
+};
 const About: FC = () => {
   const [text, setText] = useState<string>("");
 
@@ -30,29 +49,24 @@ const About: FC = () => {
       id: "",
       pw: "",
       repw: "",
+      education: [],
       address: [],
     },
   });
 
+  const { education } = method.watch();
+
   const { isLoading } = useProfileFormQuery(method);
 
-  const { mutate } = useMutation<any, any, IProfileForm>(
-    () => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            success: true,
-          });
-        }, 3000);
-      });
-    },
-    {
-      onSuccess: () => {
-        alert(123);
-        navigate("/");
-      },
-    }
-  );
+  const { mutate } = useMutation<any, any, IProfileForm>(() => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          success: true,
+        });
+      }, 3000);
+    });
+  });
 
   const { fields, append, remove } = useFieldArray<IProfileForm>({
     control: method.control,
@@ -61,6 +75,7 @@ const About: FC = () => {
 
   const handleProfileFormSubmit = useCallback<SubmitHandler<IProfileForm>>(
     (profileForm) => {
+      console.log(profileForm);
       mutate(profileForm);
     },
     []
@@ -103,26 +118,16 @@ const About: FC = () => {
                 placeholder="repw"
               />
             </Form.Field>
-            <Form.Field>
-              <Form.Label>pw</Form.Label>
-              <Form.Input
-                disabled={isLoading}
-                type="password"
-                {...method.register("pw")}
-                placeholder="pw"
-              />
-            </Form.Field>
             {fields.map((field, index) => (
-              <Form.Field key={field.id} className="flex">
-                <Layout className="w-full">
-                  {index === 0 && <Form.Label>주소</Form.Label>}
-                  <Form.Input
-                    type="text"
-                    {...method.register(`address.${index}.value`)}
-                    placeholder="repw"
-                    readOnly
-                  />
-                </Layout>
+              <Form.Field key={field.id} className="flex justify-end gap-4">
+                {index === 0 && <Form.Label>주소</Form.Label>}
+                <Form.Input
+                  type="text"
+                  {...method.register(`address.${index}.value`)}
+                  placeholder={field.value}
+                  readOnly
+                />
+
                 {index !== 0 && (
                   <Button
                     onClick={() => {
@@ -135,18 +140,15 @@ const About: FC = () => {
               </Form.Field>
             ))}
             {fields.length < 2 && (
-              <Form.Field className="flex  justify-end">
-                <Layout className="w-full">
-                  <Form.Input
-                    type="text"
-                    placeholder="주소입력"
-                    onChange={(e) => {
-                      setText(e.target.value);
-                    }}
-                  />
-                </Layout>
+              <Form.Field className="flex justify-end gap-4">
+                <Form.Input
+                  type="text"
+                  placeholder="주소입력"
+                  onChange={(e) => {
+                    setText(e.target.value);
+                  }}
+                />
                 <Button.Primary
-                  className="h-[48px]"
                   type="button"
                   onClick={() => {
                     append([{ value: text }]);
@@ -156,6 +158,42 @@ const About: FC = () => {
                 </Button.Primary>
               </Form.Field>
             )}
+            <Form.Field>
+              <Controller
+                name="education"
+                control={method.control}
+                render={({ field }) => (
+                  <ReactSelect
+                    isMulti
+                    value={EDUCATION_OPTIONS.find(
+                      (c) => c.value === +field.value
+                    )}
+                    components={{
+                      Option,
+                    }}
+                    hideSelectedOptions={false}
+                    onChange={(temp) => {
+                      console.log(field.value);
+                      field.onChange(
+                        [...temp.values()].map(({ value }) => value)
+                      );
+                    }}
+                    placeholder="학력을 입력해 주세요."
+                    options={EDUCATION_OPTIONS}
+                  />
+                )}
+                rules={{
+                  required: "학력을 입력해주세요",
+                }}
+              />
+              <Text.Error
+                ref={(element) => {
+                  console.log(element);
+                }}
+              >
+                {method.formState.errors["education"]?.message}
+              </Text.Error>
+            </Form.Field>
             <Button type="submit">저장</Button>
           </Layout.Flex>
         </Form>

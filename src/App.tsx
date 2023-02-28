@@ -1,16 +1,16 @@
+import { FC, useCallback } from "react";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import ROUTES from "@/constants/routes";
+import Text from "@/components/atoms/Text";
 import Layout from "@/components/atoms/Layout";
 import Button from "@/components/atoms/Button";
-import Form from "@/components/blocks/Form";
-import Modal, { IModalContext } from "@/components/blocks/Modal";
+import Form from "@/components/compounds/Form";
+import Modal, { IModalContext } from "@/components/compounds/Modal";
+import useFlag from "@/hooks/useFlag";
+import { TSignInForm } from "@/types/user";
 import "./index.css";
-import { FC, useCallback } from "react";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import useFlag from "./hooks/useFlag";
-import { TSignInForm } from "./types/user";
-import Text from "./components/atoms/Text";
 
 const SignInModal: FC<IModalContext> = ({ onClose }) => {
   const methods = useForm<TSignInForm>();
@@ -33,7 +33,7 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
             </Modal.Header>
 
             <Modal.Body>
-              <Layout.Flex className="h-[500px] flex-col gap-10">
+              <Layout.Flex className="flex-col gap-10 p-6">
                 <Form.Field>
                   <Form.Label>아이디</Form.Label>
                   <Form.Input {...methods.register("id")} autoFocus />
@@ -66,18 +66,18 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Layout className="sticky top-0 z-30 w-full bg-white p-3 shadow-md">
-          <Layout.List className="flex justify-between">
+          <Layout as="ul" className="flex justify-between">
             {ROUTES.filter(({ isShowGnb }) => isShowGnb).map((route, index) => (
-              <Layout.ListItem key={index}>
+              <Layout as="li" key={index}>
                 <Link to={route.path}>{route.pathname}</Link>
-              </Layout.ListItem>
+              </Layout>
             ))}
-            <Layout.ListItem>
+            <Layout>
               <Button.Text onClick={handleSignInButtonClick}>
                 로그인
               </Button.Text>
-            </Layout.ListItem>
-          </Layout.List>
+            </Layout>
+          </Layout>
         </Layout>
         <Layout className="my-0 mx-auto max-w-7xl px-4">
           <Routes>

@@ -9,7 +9,7 @@ const Default = forwardRef<
     <button
       ref={ref}
       className={classNames(
-        "w-full rounded-md border p-3 hover:opacity-80",
+        "w-full rounded-md border p-2 hover:opacity-80",
         className
       )}
       {...rest}
