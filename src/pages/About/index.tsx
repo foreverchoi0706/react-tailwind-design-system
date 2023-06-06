@@ -23,6 +23,7 @@ export interface IProfileForm {
   address: {
     value: string;
   }[];
+  cell: string;
 }
 
 const EDUCATION_OPTIONS = [
@@ -43,7 +44,6 @@ const Option: FC<OptionProps<any>> = (props) => {
 const About: FC = () => {
   const [text, setText] = useState<string>("");
 
-  const navigate = useNavigate();
   const method = useForm<IProfileForm>({
     defaultValues: {
       id: "",
@@ -51,10 +51,11 @@ const About: FC = () => {
       repw: "",
       education: [],
       address: [],
+      cell: "",
     },
   });
 
-  const { education } = method.watch();
+  const { errors } = method.formState;
 
   const { isLoading } = useProfileFormQuery(method);
 
@@ -97,8 +98,9 @@ const About: FC = () => {
                 {...method.register("id", {
                   required: "ID는 필수입니다.",
                 })}
-                placeholder={method.formState.errors["id"]?.message || "id"}
+                placeholder="id"
               />
+              {errors.id && <Text.Error>{errors.id.message}</Text.Error>}
             </Form.Field>
             <Form.Field>
               <Form.Label>pw</Form.Label>
@@ -186,13 +188,23 @@ const About: FC = () => {
                   required: "학력을 입력해주세요",
                 }}
               />
-              <Text.Error
-                ref={(element) => {
-                  console.log(element);
-                }}
-              >
-                {method.formState.errors["education"]?.message}
-              </Text.Error>
+              {errors.education && (
+                <Text.Error>{errors.education.message}</Text.Error>
+              )}
+            </Form.Field>
+            <Form.Field>
+              <Form.Label>전화번호</Form.Label>
+              <Form.Input
+                disabled={isLoading}
+                placeholder="01012345678"
+                {...method.register("cell", {
+                  pattern: {
+                    value: /01[0|1|6|7|8|9]{1}([0-9]{7,8})/g,
+                    message: "올바른 전화번호를 입력해주세요.",
+                  },
+                })}
+              />
+              {errors.cell && <Text.Error>{errors.cell.message}</Text.Error>}
             </Form.Field>
             <Button type="submit">저장</Button>
           </Layout.Flex>
