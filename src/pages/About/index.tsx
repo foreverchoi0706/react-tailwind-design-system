@@ -11,7 +11,6 @@ import Layout from "@/components/atoms/Layout";
 import Form from "@/components/compounds/Form";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import ReactSelect, { components, OptionProps } from "react-select";
 import Text from "@/components/atoms/Text";
 
@@ -86,128 +85,126 @@ const About: FC = () => {
     <Layout>
       <FormProvider {...method}>
         <Form onSubmit={method.handleSubmit(handleProfileFormSubmit)}>
-          <Layout.Flex className="max-w-7xl flex-col gap-4">
-            <Form.Field>
-              <Form.Label>id</Form.Label>
-              <Form.Input
-                disabled={isLoading}
-                className={`${
-                  method.formState.errors["id"]?.message &&
-                  "placeholder:text-red-500"
-                }`}
-                {...method.register("id", {
-                  required: "ID는 필수입니다.",
-                })}
-                placeholder="id"
-              />
-              {errors.id && <Text.Error>{errors.id.message}</Text.Error>}
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>pw</Form.Label>
-              <Form.Input
-                disabled={isLoading}
-                type="password"
-                {...method.register("pw")}
-                placeholder="pw"
-              />
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>repw</Form.Label>
-              <Form.Input
-                disabled={isLoading}
-                type="password"
-                {...method.register("repw")}
-                placeholder="repw"
-              />
-            </Form.Field>
-            {fields.map((field, index) => (
-              <Form.Field key={field.id} className="flex justify-end gap-4">
-                {index === 0 && <Form.Label>주소</Form.Label>}
+          <fieldset disabled={isLoading}>
+            <Layout.Flex className="max-w-7xl flex-col gap-4">
+              <Form.Field>
+                <Form.Label>id</Form.Label>
                 <Form.Input
-                  type="text"
-                  {...method.register(`address.${index}.value`)}
-                  placeholder={field.value}
-                  readOnly
+                  className={`${
+                    method.formState.errors["id"]?.message &&
+                    "placeholder:text-red-500"
+                  }`}
+                  {...method.register("id", {
+                    required: "ID는 필수입니다.",
+                  })}
+                  placeholder="id"
                 />
+                {errors.id && <Text.Error>{errors.id.message}</Text.Error>}
+              </Form.Field>
+              <Form.Field>
+                <Form.Label>pw</Form.Label>
+                <Form.Input
+                  type="password"
+                  {...method.register("pw")}
+                  placeholder="pw"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Form.Label>repw</Form.Label>
+                <Form.Input
+                  type="password"
+                  {...method.register("repw")}
+                  placeholder="repw"
+                />
+              </Form.Field>
+              {fields.map((field, index) => (
+                <Form.Field key={field.id} className="flex justify-end gap-4">
+                  {index === 0 && <Form.Label>주소</Form.Label>}
+                  <Form.Input
+                    type="text"
+                    {...method.register(`address.${index}.value`)}
+                    placeholder={field.value}
+                    readOnly
+                  />
 
-                {index !== 0 && (
-                  <Button
+                  {index !== 0 && (
+                    <Button
+                      onClick={() => {
+                        remove(index);
+                      }}
+                    >
+                      X
+                    </Button>
+                  )}
+                </Form.Field>
+              ))}
+              {fields.length < 2 && (
+                <Form.Field className="flex justify-end gap-4">
+                  <Form.Input
+                    type="text"
+                    placeholder="주소입력"
+                    onChange={(e) => {
+                      setText(e.target.value);
+                    }}
+                  />
+                  <Button.Primary
+                    type="button"
                     onClick={() => {
-                      remove(index);
+                      append([{ value: text }]);
                     }}
                   >
-                    X
-                  </Button>
-                )}
-              </Form.Field>
-            ))}
-            {fields.length < 2 && (
-              <Form.Field className="flex justify-end gap-4">
-                <Form.Input
-                  type="text"
-                  placeholder="주소입력"
-                  onChange={(e) => {
-                    setText(e.target.value);
+                    추가
+                  </Button.Primary>
+                </Form.Field>
+              )}
+              <Form.Field>
+                <Controller
+                  name="education"
+                  control={method.control}
+                  render={({ field }) => (
+                    <ReactSelect
+                      isMulti
+                      value={EDUCATION_OPTIONS.find(
+                        (c) => c.value === +field.value
+                      )}
+                      components={{
+                        Option,
+                      }}
+                      hideSelectedOptions={false}
+                      onChange={(temp) => {
+                        console.log(field.value);
+                        field.onChange(
+                          [...temp.values()].map(({ value }) => value)
+                        );
+                      }}
+                      placeholder="학력을 입력해 주세요."
+                      options={EDUCATION_OPTIONS}
+                    />
+                  )}
+                  rules={{
+                    required: "학력을 입력해주세요",
                   }}
                 />
-                <Button.Primary
-                  type="button"
-                  onClick={() => {
-                    append([{ value: text }]);
-                  }}
-                >
-                  추가
-                </Button.Primary>
-              </Form.Field>
-            )}
-            <Form.Field>
-              <Controller
-                name="education"
-                control={method.control}
-                render={({ field }) => (
-                  <ReactSelect
-                    isMulti
-                    value={EDUCATION_OPTIONS.find(
-                      (c) => c.value === +field.value
-                    )}
-                    components={{
-                      Option,
-                    }}
-                    hideSelectedOptions={false}
-                    onChange={(temp) => {
-                      console.log(field.value);
-                      field.onChange(
-                        [...temp.values()].map(({ value }) => value)
-                      );
-                    }}
-                    placeholder="학력을 입력해 주세요."
-                    options={EDUCATION_OPTIONS}
-                  />
+                {errors.education && (
+                  <Text.Error>{errors.education.message}</Text.Error>
                 )}
-                rules={{
-                  required: "학력을 입력해주세요",
-                }}
-              />
-              {errors.education && (
-                <Text.Error>{errors.education.message}</Text.Error>
-              )}
-            </Form.Field>
-            <Form.Field>
-              <Form.Label>전화번호</Form.Label>
-              <Form.Input
-                disabled={isLoading}
-                placeholder="01012345678"
-                {...method.register("cell", {
-                  pattern: {
-                    value: /01[0|1|6|7|8|9]{1}([0-9]{7,8})/g,
-                    message: "올바른 전화번호를 입력해주세요.",
-                  },
-                })}
-              />
-              {errors.cell && <Text.Error>{errors.cell.message}</Text.Error>}
-            </Form.Field>
-            <Button type="submit">저장</Button>
-          </Layout.Flex>
+              </Form.Field>
+              <Form.Field>
+                <Form.Label>전화번호</Form.Label>
+                <Form.Input
+                  placeholder="01012345678"
+                  {...method.register("cell", {
+                    pattern: {
+                      value: /01[0|1|6|7|8|9]{1}([0-9]{7,8})/g,
+                      message: "올바른 전화번호를 입력해주세요.",
+                    },
+                  })}
+                />
+                {errors.cell && <Text.Error>{errors.cell.message}</Text.Error>}
+              </Form.Field>
+              <Button type="submit">저장</Button>
+            </Layout.Flex>
+          </fieldset>
         </Form>
       </FormProvider>
     </Layout>

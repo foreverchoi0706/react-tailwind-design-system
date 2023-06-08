@@ -4,7 +4,7 @@ import { UseFormReturn } from "react-hook-form";
 
 const useProfileFormQuery = (method: UseFormReturn<IProfileForm>) => {
     return useQuery<IProfileForm>(
-        ["DATA"],
+        ["PROFILE"],
         () => {
             return new Promise<IProfileForm>((resolve) => {
                 setTimeout(() => {
@@ -15,9 +15,10 @@ const useProfileFormQuery = (method: UseFormReturn<IProfileForm>) => {
                         education: [1],
                         address: [{
                             value: "조원로 129",
-                        }]
+                        }],
+                        cell: "01039094083"
                     });
-                }, 300);
+                }, 1000);
             });
         },
         {
