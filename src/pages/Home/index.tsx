@@ -1,15 +1,21 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-
+import queryKeyStore from "@/factory";
+import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/atoms/Layout";
 import Text from "@/components/atoms/Text";
 
 const Home: FC = () => {
+  const [filterNumber, setFilterNumber] = useState<number | null>(null);
+  const { data } = useQuery(queryKeyStore.todos.list({ id: filterNumber || 999 }));
+  if (!data) return null;
+
   return (
     <Layout>
       <Layout.Grid className="grid-cols-2 gap-3 lg:grid-cols-4">
-        {new Array(50).fill("").map((_, index) => (
-          <Link key={index} to={`/about/${index}`}>
+        <input type="text" onChange={({ target }) => setFilterNumber(+target.value)} />
+        {data.map((value, index) => (
+          <Link key={index} to={`/about/${value}`}>
             <Layout className="rounded-md border bg-white p-5">
               <Layout className="overflow-hidden">
                 <img
@@ -18,7 +24,7 @@ const Home: FC = () => {
                 />
               </Layout>
               <Layout>
-                <Text as="strong">{index}</Text>
+                <Text as="strong">{value}</Text>
               </Layout>
             </Layout>
           </Link>
