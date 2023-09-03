@@ -90,9 +90,10 @@ const About: FC = () => {
               <Form.Field>
                 <Form.Label>id</Form.Label>
                 <Form.Input
-                  className={`${method.formState.errors["id"]?.message &&
+                  className={`${
+                    method.formState.errors["id"]?.message &&
                     "placeholder:text-red-500"
-                    }`}
+                  }`}
                   {...method.register("id", {
                     required: "ID는 필수입니다.",
                   })}

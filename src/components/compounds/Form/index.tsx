@@ -10,6 +10,7 @@ import {
   InputHTMLAttributes,
   HTMLAttributes,
 } from "react";
+import Input from "@/components/atoms/Input";
 
 interface IFieldContext {
   id?: string;
@@ -19,7 +20,7 @@ const FieldContext = createContext<IFieldContext>({
   id: undefined,
 });
 
-const Field = forwardRef<
+const RHFField = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement> & IFieldContext
 >(({ children, className, ...rest }, ref) => {
@@ -33,22 +34,15 @@ const Field = forwardRef<
   );
 });
 
-const Input = forwardRef<
+const RHFInput = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement>
 >(({ className, ...rest }, ref) => {
   const { id } = useContext(FieldContext);
-  return (
-    <input
-      ref={ref}
-      id={id}
-      className={twMerge("h-full w-full rounded-md border p-2", className)}
-      {...rest}
-    />
-  );
+  return <Input ref={ref} {...rest} />;
 });
 
-const Label = forwardRef<
+const RHFLabel = forwardRef<
   HTMLLabelElement,
   LabelHTMLAttributes<HTMLLabelElement>
 >((props, ref) => {
@@ -70,8 +64,8 @@ export default Object.assign(
     }
   ),
   {
-    Field,
-    Input,
-    Label,
+    Field: RHFField,
+    Input: RHFInput,
+    Label: RHFLabel,
   }
 );

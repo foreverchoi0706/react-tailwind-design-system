@@ -4,6 +4,7 @@ import queryKeyStore from "@/factory";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/atoms/Layout";
 import Text from "@/components/atoms/Text";
+import Input from "@/components/atoms/Input";
 
 const Home: FC = () => {
   const { data } = useQuery(queryKeyStore.todos.list());
@@ -13,6 +14,9 @@ const Home: FC = () => {
 
   return (
     <Layout>
+      <Layout className="my-4">
+        <Input />
+      </Layout>
       <Layout.Grid className="grid-cols-2 gap-3 lg:grid-cols-4">
         {data.map((value, index) => (
           <Link key={index} to={`/about/${value}`}>
