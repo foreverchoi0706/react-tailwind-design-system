@@ -1,4 +1,5 @@
-import classNames from "classnames";
+import { twMerge } from "tailwind-merge";
+
 import {
   createContext,
   forwardRef,
@@ -25,7 +26,7 @@ const Field = forwardRef<
   const id = useId();
   return (
     <FieldContext.Provider value={{ id: rest.id || id }}>
-      <div className={classNames("relative", className)} ref={ref} {...rest}>
+      <div className={twMerge("relative", className)} ref={ref} {...rest}>
         {children}
       </div>
     </FieldContext.Provider>
@@ -41,7 +42,7 @@ const Input = forwardRef<
     <input
       ref={ref}
       id={id}
-      className={classNames("h-full w-full rounded-md border p-2", className)}
+      className={twMerge("h-full w-full rounded-md border p-2", className)}
       {...rest}
     />
   );

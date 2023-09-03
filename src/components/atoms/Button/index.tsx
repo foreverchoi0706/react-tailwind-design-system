@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
-import classNames from "classnames";
+import { twMerge } from "tailwind-merge";
 
 const Default = forwardRef<
   HTMLButtonElement,
@@ -8,7 +8,7 @@ const Default = forwardRef<
   return (
     <button
       ref={ref}
-      className={classNames(
+      className={twMerge(
         "w-full rounded-md border p-2 hover:opacity-80",
         className
       )}
@@ -24,7 +24,7 @@ const Disabled = forwardRef<
   return (
     <Default
       ref={ref}
-      className={classNames("bg-disabled", className)}
+      className={twMerge("bg-disabled", className)}
       {...rest}
     />
   );
@@ -35,11 +35,7 @@ const Primary = forwardRef<
   ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, ...rest }, ref) => {
   return (
-    <Default
-      ref={ref}
-      className={classNames("bg-primary", className)}
-      {...rest}
-    />
+    <Default ref={ref} className={twMerge("bg-primary", className)} {...rest} />
   );
 });
 
