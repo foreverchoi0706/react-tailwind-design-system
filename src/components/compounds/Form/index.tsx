@@ -1,5 +1,3 @@
-import { twMerge } from "tailwind-merge";
-
 import {
   createContext,
   forwardRef,
@@ -10,6 +8,8 @@ import {
   InputHTMLAttributes,
   HTMLAttributes,
 } from "react";
+import { twMerge } from "tailwind-merge";
+
 import Input from "@/components/atoms/Input";
 
 interface IFieldContext {
@@ -27,7 +27,7 @@ const RHFField = forwardRef<
   const id = useId();
   return (
     <FieldContext.Provider value={{ id: rest.id || id }}>
-      <div className={twMerge("relative", className)} ref={ref} {...rest}>
+      <div ref={ref} className={twMerge("relative", className)} {...rest}>
         {children}
       </div>
     </FieldContext.Provider>
@@ -49,9 +49,9 @@ const RHFLabel = forwardRef<
   const { id } = useContext(FieldContext);
   return (
     <label
+      ref={ref}
       className="absolute -top-4 left-2 bg-white"
       htmlFor={id}
-      ref={ref}
       {...props}
     />
   );
@@ -60,7 +60,7 @@ const RHFLabel = forwardRef<
 export default Object.assign(
   forwardRef<HTMLFormElement, FormHTMLAttributes<HTMLFormElement>>(
     (props, ref) => {
-      return <form autoComplete="off" ref={ref} {...props} />;
+      return <form ref={ref} autoComplete="off" {...props} />;
     }
   ),
   {

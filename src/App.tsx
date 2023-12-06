@@ -1,13 +1,14 @@
-import { FC, useCallback } from "react";
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import ROUTES from "@/constants/routes";
-import Text from "@/components/atoms/Text";
-import Layout from "@/components/atoms/Layout";
+import React,{ FC, useCallback } from "react";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+
 import Button from "@/components/atoms/Button";
+import Layout from "@/components/atoms/Layout";
+import Text from "@/components/atoms/Text";
 import Form from "@/components/compounds/Form";
 import Modal, { IModalContext } from "@/components/compounds/Modal";
+import ROUTES from "@/constants/routes";
 import useFlag from "@/hooks/useFlag";
 import { TSignInForm } from "@/types/user";
 import "./index.css";
@@ -48,7 +49,7 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
             <Modal.Footer>
               <Layout.Flex className="justify-between gap-3">
                 <Button.Primary type="submit">로그인</Button.Primary>
-                <Button.Disabled onClick={onClose}>취소</Button.Disabled>
+                <Button.Disabled  about="" onClick={onClose}>취소</Button.Disabled>
               </Layout.Flex>
             </Modal.Footer>
           </Modal.Contents>
@@ -68,7 +69,7 @@ function App() {
         <Layout className="sticky top-0 z-30 w-full bg-white p-3 shadow-md">
           <Layout as="ul" className="flex justify-between">
             {ROUTES.filter(({ isShowGnb }) => isShowGnb).map((route, index) => (
-              <Layout as="li" key={index}>
+              <Layout key={index} as="li">
                 <Link to={route.path}>{route.pathname}</Link>
               </Layout>
             ))}
@@ -82,9 +83,9 @@ function App() {
         <Layout className="my-0 mx-auto max-w-7xl px-4">
           <Routes>
             {ROUTES.map(({ path, Component }, index) => (
-              <Route element={<Component />} key={index} path={path} />
+              <Route key={index} element={<Component />} path={path} />
             ))}
-            <Route path="/*" element={<Navigate to="/" replace />} />
+            <Route element={<Navigate replace to="/" />} path="/*" />
           </Routes>
         </Layout>
         {isOpen && <SignInModal onClose={handleSignInButtonClick} />}

@@ -1,10 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import queryKeyStore from "@/factory";
-import { useQuery } from "@tanstack/react-query";
+
+import Input from "@/components/atoms/Input";
 import Layout from "@/components/atoms/Layout";
 import Text from "@/components/atoms/Text";
-import Input from "@/components/atoms/Input";
+import queryKeyStore from "@/factory";
 
 const Home: FC = () => {
   const { data } = useQuery({

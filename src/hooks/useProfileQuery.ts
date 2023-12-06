@@ -1,6 +1,7 @@
-import { IProfileForm } from "@/pages/About";
 import { useQuery } from "@tanstack/react-query";
 import { UseFormReturn } from "react-hook-form";
+
+import { IProfileForm } from "@/pages/About";
 
 const useProfileFormQuery = (method: UseFormReturn<IProfileForm>) => {
     return useQuery<IProfileForm>(

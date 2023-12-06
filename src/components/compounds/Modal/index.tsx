@@ -1,4 +1,4 @@
-import {
+import React,{
   ButtonHTMLAttributes,
   forwardRef,
   HTMLAttributes,
@@ -6,6 +6,7 @@ import {
 } from "react";
 import { createContext, PropsWithChildren, useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
+
 import styles from "./index.module.css";
 
 export interface IModalContext {
@@ -23,14 +24,15 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         className={`${styles.modal_wrapper} fixed top-0 z-50 flex w-screen flex-col items-center justify-center gap-10`}
       >
         <div
-          className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200  bg-white md:h-auto md:w-auto md:rounded-md"
           ref={ref}
+          className="border-r-5 relative flex h-full w-full flex-col rounded-none border border-gray-200  bg-white md:h-auto md:w-auto md:rounded-md"
           {...props}
         />
       </div>
     );
   }
 );
+Contents.displayName="Contents";
 
 const CloseButton = forwardRef<
   HTMLButtonElement,
@@ -39,21 +41,23 @@ const CloseButton = forwardRef<
   const { onClose } = useContext(ModalContext);
   return (
     <button
+      ref={ref}
       className="absolute top-4 right-6"
       onClick={onClose}
-      ref={ref}
       {...props}
     >
       X
     </button>
   );
 });
+CloseButton.displayName="CloseButton"
 
 const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
-    return <header className="bg-gray-100 p-6" ref={ref} {...props} />;
+    return <header ref={ref} className="bg-gray-100 p-6" {...props} />;
   }
 );
+Header.displayName="Header";
 
 const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
@@ -62,18 +66,20 @@ const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
     );
   }
 );
+Body.displayName="Body";
 
 const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
     return (
       <footer
-        className=" bottom-0 w-full bg-gray-100 p-6 "
         ref={ref}
+        className=" bottom-0 w-full bg-gray-100 p-6 "
         {...props}
       />
     );
   }
 );
+Footer.displayName ="Footer";
 
 export default Object.assign(
   ({ onClose, ...rest }: PropsWithChildren<IModalContext>) => {

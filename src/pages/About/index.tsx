@@ -1,4 +1,5 @@
-import { FC, useCallback, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import React,{ FC, useCallback, useState } from "react";
 import {
   Controller,
   FormProvider,
@@ -6,13 +7,14 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
+import ReactSelect, { components, OptionProps } from "react-select";
+
 import Button from "@/components/atoms/Button";
 import Layout from "@/components/atoms/Layout";
+import Text from "@/components/atoms/Text";
 import Form from "@/components/compounds/Form";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
-import { useMutation } from "@tanstack/react-query";
-import ReactSelect, { components, OptionProps } from "react-select";
-import Text from "@/components/atoms/Text";
+
 
 export interface IProfileForm {
   id: string;
@@ -35,7 +37,7 @@ const EDUCATION_OPTIONS = [
 const Option: FC<OptionProps<any>> = (props) => {
   return (
     <components.Option {...props}>
-      <input type="checkbox" checked={props.isSelected} onChange={() => null} />{" "}
+      <input checked={props.isSelected} type="checkbox" onChange={() => null} />{" "}
       <label>{props.label}</label>
     </components.Option>
   );
@@ -141,8 +143,8 @@ const About: FC = () => {
               {fields.length < 2 && (
                 <Form.Field className="flex justify-end gap-4">
                   <Form.Input
-                    type="text"
                     placeholder="주소입력"
+                    type="text"
                     onChange={(e) => {
                       setText(e.target.value);
                     }}
@@ -159,26 +161,26 @@ const About: FC = () => {
               )}
               <Form.Field>
                 <Controller
-                  name="education"
                   control={method.control}
+                  name="education"
                   render={({ field }) => (
                     <ReactSelect
-                      isMulti
-                      value={EDUCATION_OPTIONS.find(
-                        (c) => c.value === +field.value
-                      )}
                       components={{
                         Option,
                       }}
                       hideSelectedOptions={false}
+                      isMulti
+                      options={EDUCATION_OPTIONS}
+                      placeholder="학력을 입력해 주세요."
+                      value={EDUCATION_OPTIONS.find(
+                        (c) => c.value === +field.value
+                      )}
                       onChange={(temp) => {
                         console.log(field.value);
                         field.onChange(
                           [...temp.values()].map(({ value }) => value)
                         );
                       }}
-                      placeholder="학력을 입력해 주세요."
-                      options={EDUCATION_OPTIONS}
                     />
                   )}
                   rules={{

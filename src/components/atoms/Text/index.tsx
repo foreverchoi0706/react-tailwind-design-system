@@ -1,6 +1,7 @@
-import { forwardRef, HTMLAttributes } from "react";
-import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
 import classNames from "classnames";
+import React,{ forwardRef, HTMLAttributes } from "react";
+
+import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
 
 const Default = forwardRef<
   HTMLElement,
@@ -8,6 +9,7 @@ const Default = forwardRef<
 >(({ as = "span", ...rest }, ref) => {
   return <Element ref={ref} as={as} {...rest} />;
 });
+Default.displayName = "Default";
 
 const Error = forwardRef<
   HTMLElement,
@@ -15,12 +17,13 @@ const Error = forwardRef<
 >(({ as = "em", className, ...rest }, ref) => {
   return (
     <Default
-      className={classNames("text-red-500", className)}
       ref={ref}
       as={as}
+      className={classNames("text-red-500", className)}
       {...rest}
     />
   );
 });
+Error.displayName = "Error";
 
 export default Object.assign(Default, { Error });
