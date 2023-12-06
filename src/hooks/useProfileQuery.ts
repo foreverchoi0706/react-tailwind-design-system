@@ -4,8 +4,9 @@ import { UseFormReturn } from "react-hook-form";
 
 const useProfileFormQuery = (method: UseFormReturn<IProfileForm>) => {
     return useQuery<IProfileForm>(
-        ["PROFILE"],
-        () => {
+        {
+           queryKey: ["PROFILE"],
+            queryFn : () => {
             return new Promise<IProfileForm>((resolve) => {
                 setTimeout(() => {
                     resolve({
@@ -20,12 +21,9 @@ const useProfileFormQuery = (method: UseFormReturn<IProfileForm>) => {
                     });
                 }, 1000);
             });
-        },
-        {
+    },
             refetchOnWindowFocus: false,
-            onSuccess: (data) => {
-                method.reset(data);
-            },
+
         }
     );
 }

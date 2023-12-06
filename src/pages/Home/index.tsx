@@ -7,7 +7,9 @@ import Text from "@/components/atoms/Text";
 import Input from "@/components/atoms/Input";
 
 const Home: FC = () => {
-  const { data } = useQuery(queryKeyStore.todos.list());
+  const { data } = useQuery({
+      ...queryKeyStore.todos.list()
+  });
   console.log(data);
 
   if (!data) return null;
@@ -23,6 +25,7 @@ const Home: FC = () => {
             <Layout className="rounded-md border bg-white p-5">
               <Layout className="overflow-hidden">
                 <img
+                    alt="image"
                   className="duration-200 hover:scale-125 hover:opacity-80"
                   src="https://i.ytimg.com/vi/bN01WRBS0Ec/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDqr49CxWnwW8Kz5iCIndcAtfBjEg"
                 />
