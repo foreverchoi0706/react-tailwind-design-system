@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import React,{ FC, useCallback, useState } from "react";
 import {
   Controller,
@@ -34,7 +33,7 @@ const EDUCATION_OPTIONS = [
   { label: "대학교", value: 4 },
 ];
 
-const Option: FC<OptionProps<any>> = (props) => {
+const Option: FC<OptionProps<unknown>> = (props) => {
   return (
     <components.Option {...props}>
       <input checked={props.isSelected} type="checkbox" onChange={() => null} />{" "}
@@ -60,15 +59,7 @@ const About: FC = () => {
 
   const { isLoading } = useProfileFormQuery(method);
 
-  const { mutate } = useMutation<any, any, IProfileForm>(() => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-        });
-      }, 3000);
-    });
-  });
+
 
   const { fields, append, remove } = useFieldArray<IProfileForm>({
     control: method.control,
@@ -78,7 +69,7 @@ const About: FC = () => {
   const handleProfileFormSubmit = useCallback<SubmitHandler<IProfileForm>>(
     (profileForm) => {
       console.log(profileForm);
-      mutate(profileForm);
+
     },
     []
   );
