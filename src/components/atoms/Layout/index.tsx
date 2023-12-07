@@ -1,4 +1,4 @@
-import React,{ forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
 import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
@@ -9,7 +9,7 @@ const Default = forwardRef<
 >((props, ref) => {
   return <Element ref={ref} {...props} />;
 });
-Default.displayName="Default";
+Default.displayName = "Default";
 
 const Flex = forwardRef<
   HTMLDivElement,
@@ -17,8 +17,7 @@ const Flex = forwardRef<
 >(({ className, ...rest }, ref) => {
   return <Element ref={ref} className={twMerge("flex", className)} {...rest} />;
 });
-Flex.displayName="Flex";
-
+Flex.displayName = "Flex";
 
 const Grid = forwardRef<
   HTMLDivElement,
@@ -26,8 +25,7 @@ const Grid = forwardRef<
 >(({ className, ...rest }, ref) => {
   return <Element ref={ref} className={twMerge("grid", className)} {...rest} />;
 });
-Grid.displayName="Grid";
-
+Grid.displayName = "Grid";
 
 export default Object.assign(Default, {
   Flex,

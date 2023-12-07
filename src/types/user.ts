@@ -1,4 +1,4 @@
 export type TSignInForm = {
-    id: string;
-    pw: string;
-}
+  id: string;
+  pw: string;
+};

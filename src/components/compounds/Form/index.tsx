@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   forwardRef,
   useContext,
@@ -33,6 +33,7 @@ const RHFField = forwardRef<
     </FieldContext.Provider>
   );
 });
+RHFField.displayName = "RHFField";
 
 const RHFInput = forwardRef<
   HTMLInputElement,
@@ -41,6 +42,7 @@ const RHFInput = forwardRef<
   const { id } = useContext(FieldContext);
   return <Input ref={ref} {...rest} />;
 });
+RHFInput.displayName = "RHFInput";
 
 const RHFLabel = forwardRef<
   HTMLLabelElement,
@@ -56,16 +58,17 @@ const RHFLabel = forwardRef<
     />
   );
 });
+RHFLabel.displayName = "RHFLabel";
 
-export default Object.assign(
-  forwardRef<HTMLFormElement, FormHTMLAttributes<HTMLFormElement>>(
-    (props, ref) => {
-      return <form ref={ref} autoComplete="off" {...props} />;
-    }
-  ),
-  {
-    Field: RHFField,
-    Input: RHFInput,
-    Label: RHFLabel,
-  }
+const Form = forwardRef<HTMLFormElement, FormHTMLAttributes<HTMLFormElement>>(
+  (props, ref) => {
+    return <form ref={ref} autoComplete="off" {...props} />;
+  },
 );
+Form.displayName = "Form";
+
+export default Object.assign(Form, {
+  Field: RHFField,
+  Input: RHFInput,
+  Label: RHFLabel,
+});

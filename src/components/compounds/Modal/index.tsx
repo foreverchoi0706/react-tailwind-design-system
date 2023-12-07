@@ -1,4 +1,4 @@
-import React,{
+import React, {
   ButtonHTMLAttributes,
   forwardRef,
   HTMLAttributes,
@@ -30,9 +30,9 @@ const Contents = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         />
       </div>
     );
-  }
+  },
 );
-Contents.displayName="Contents";
+Contents.displayName = "Contents";
 
 const CloseButton = forwardRef<
   HTMLButtonElement,
@@ -50,23 +50,23 @@ const CloseButton = forwardRef<
     </button>
   );
 });
-CloseButton.displayName="CloseButton"
+CloseButton.displayName = "CloseButton";
 
 const Header = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
     return <header ref={ref} className="bg-gray-100 p-6" {...props} />;
-  }
+  },
 );
-Header.displayName="Header";
+Header.displayName = "Header";
 
 const Body = forwardRef<HTMLBodyElement, HTMLAttributes<HTMLBodyElement>>(
   (props, ref) => {
     return (
       <main ref={ref} className="flex-grow overflow-y-auto px-4" {...props} />
     );
-  }
+  },
 );
-Body.displayName="Body";
+Body.displayName = "Body";
 
 const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   (props, ref) => {
@@ -77,9 +77,9 @@ const Footer = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
         {...props}
       />
     );
-  }
+  },
 );
-Footer.displayName ="Footer";
+Footer.displayName = "Footer";
 
 export default Object.assign(
   ({ onClose, ...rest }: PropsWithChildren<IModalContext>) => {
@@ -108,8 +108,8 @@ export default Object.assign(
       <ModalContext.Provider value={{ onClose }}>
         {rest.children}
       </ModalContext.Provider>,
-      modal
+      modal,
     );
   },
-  { Contents, CloseButton, Body, Footer, Header }
+  { Contents, CloseButton, Body, Footer, Header },
 );

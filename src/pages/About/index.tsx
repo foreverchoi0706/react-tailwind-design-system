@@ -1,4 +1,4 @@
-import React,{ FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import {
   Controller,
   FormProvider,
@@ -13,7 +13,6 @@ import Layout from "@/components/atoms/Layout";
 import Text from "@/components/atoms/Text";
 import Form from "@/components/compounds/Form";
 import useProfileFormQuery from "@/hooks/useProfileQuery";
-
 
 export interface IProfileForm {
   id: string;
@@ -59,8 +58,6 @@ const About: FC = () => {
 
   const { isLoading } = useProfileFormQuery(method);
 
-
-
   const { fields, append, remove } = useFieldArray<IProfileForm>({
     control: method.control,
     name: "address",
@@ -69,9 +66,8 @@ const About: FC = () => {
   const handleProfileFormSubmit = useCallback<SubmitHandler<IProfileForm>>(
     (profileForm) => {
       console.log(profileForm);
-
     },
-    []
+    [],
   );
 
   return (
@@ -164,12 +160,12 @@ const About: FC = () => {
                       options={EDUCATION_OPTIONS}
                       placeholder="학력을 입력해 주세요."
                       value={EDUCATION_OPTIONS.find(
-                        (c) => c.value === +field.value
+                        (c) => c.value === +field.value,
                       )}
                       onChange={(temp) => {
                         console.log(field.value);
                         field.onChange(
-                          [...temp.values()].map(({ value }) => value)
+                          [...temp.values()].map(({ value }) => value),
                         );
                       }}
                     />

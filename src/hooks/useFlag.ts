@@ -1,7 +1,7 @@
 import { useState, SetStateAction, Dispatch } from "react";
 
 const useFlag = (
-  initialFlag: boolean = false
+  initialFlag: boolean = false,
 ): [boolean, () => void, Dispatch<SetStateAction<boolean>>] => {
   const [flag, setFlag] = useState<boolean>(initialFlag);
 

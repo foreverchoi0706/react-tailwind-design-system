@@ -1,5 +1,5 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import React,{ FC, useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
     (signInForm) => {
       console.log(signInForm);
     },
-    []
+    [],
   );
 
   return (
@@ -49,7 +49,9 @@ const SignInModal: FC<IModalContext> = ({ onClose }) => {
             <Modal.Footer>
               <Layout.Flex className="justify-between gap-3">
                 <Button.Primary type="submit">로그인</Button.Primary>
-                <Button.Disabled  about="" onClick={onClose}>취소</Button.Disabled>
+                <Button.Disabled about="" onClick={onClose}>
+                  취소
+                </Button.Disabled>
               </Layout.Flex>
             </Modal.Footer>
           </Modal.Contents>

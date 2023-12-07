@@ -8,7 +8,7 @@ import {
 } from "react";
 
 export type PropsWithAsChildren<
-  T extends HTMLAttributes<HTMLElement> = HTMLAttributes<HTMLElement>
+  T extends HTMLAttributes<HTMLElement> = HTMLAttributes<HTMLElement>,
 > = {
   as?: ElementType;
 } & PropsWithChildren<T>;
@@ -19,7 +19,8 @@ const Element = forwardRef<HTMLElement, PropsWithAsChildren>(
       ref,
       ...rest,
     });
-  }
+  },
 );
+Element.displayName = "Element";
 
 export default memo(Element);

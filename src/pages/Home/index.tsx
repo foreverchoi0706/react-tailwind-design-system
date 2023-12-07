@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { FC } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 import Input from "@/components/atoms/Input";
@@ -9,7 +9,7 @@ import queryKeyStore from "@/factory";
 
 const Home: FC = () => {
   const { data } = useQuery({
-      ...queryKeyStore.todos.list()
+    ...queryKeyStore.todos.list(),
   });
   console.log(data);
 
@@ -26,7 +26,7 @@ const Home: FC = () => {
             <Layout className="rounded-md border bg-white p-5">
               <Layout className="overflow-hidden">
                 <img
-                    alt="image"
+                  alt="image"
                   className="duration-200 hover:scale-125 hover:opacity-80"
                   src="https://i.ytimg.com/vi/bN01WRBS0Ec/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDqr49CxWnwW8Kz5iCIndcAtfBjEg"
                 />
