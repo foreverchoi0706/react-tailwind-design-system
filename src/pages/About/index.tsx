@@ -1,12 +1,10 @@
 import React, { FC, useCallback, useState } from "react";
 import {
-  Controller,
   FormProvider,
   SubmitHandler,
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import ReactSelect, { components, OptionProps } from "react-select";
 
 import Button from "@/components/atoms/Button";
 import Layout from "@/components/atoms/Layout";
@@ -25,21 +23,6 @@ export interface IProfileForm {
   cell: string;
 }
 
-const EDUCATION_OPTIONS = [
-  { label: "초등학교", value: 1 },
-  { label: "중학교", value: 2 },
-  { label: "고등학교", value: 3 },
-  { label: "대학교", value: 4 },
-];
-
-const Option: FC<OptionProps<unknown>> = (props) => {
-  return (
-    <components.Option {...props}>
-      <input checked={props.isSelected} type="checkbox" onChange={() => null} />{" "}
-      <label>{props.label}</label>
-    </components.Option>
-  );
-};
 const About: FC = () => {
   const [text, setText] = useState<string>("");
 
@@ -146,38 +129,6 @@ const About: FC = () => {
                   </Button.Primary>
                 </Form.Field>
               )}
-              <Form.Field>
-                <Controller
-                  control={method.control}
-                  name="education"
-                  render={({ field }) => (
-                    <ReactSelect
-                      components={{
-                        Option,
-                      }}
-                      hideSelectedOptions={false}
-                      isMulti
-                      options={EDUCATION_OPTIONS}
-                      placeholder="학력을 입력해 주세요."
-                      value={EDUCATION_OPTIONS.find(
-                        (c) => c.value === +field.value,
-                      )}
-                      onChange={(temp) => {
-                        console.log(field.value);
-                        field.onChange(
-                          [...temp.values()].map(({ value }) => value),
-                        );
-                      }}
-                    />
-                  )}
-                  rules={{
-                    required: "학력을 입력해주세요",
-                  }}
-                />
-                {errors.education && (
-                  <Text.Error>{errors.education.message}</Text.Error>
-                )}
-              </Form.Field>
               <Form.Field>
                 <Form.Label>전화번호</Form.Label>
                 <Form.Input
