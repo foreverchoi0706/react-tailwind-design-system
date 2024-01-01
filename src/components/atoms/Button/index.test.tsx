@@ -15,3 +15,11 @@ it("클릭 시 onClick 함수가 호출되는지", async () => {
   await user.click(target);
   expect(spy).toBeCalled();
 });
+
+it("classname props가 정상적으로 작동하는지", async () => {
+  const buttonText = "buttonText";
+  const className = "testClassName";
+  render(<Target className={className}>{buttonText}</Target>);
+  const target = screen.getByText<HTMLButtonElement>(buttonText);
+  expect(target).toHaveClass(className);
+});
