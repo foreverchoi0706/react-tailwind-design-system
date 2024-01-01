@@ -1,10 +1,17 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
-import { test, expect } from "vitest";
+import { expect, it, vi } from "vitest";
 
-import Component from "./index";
+import Target from "./index";
 
-test("제대로 값을 가져오는지2", () => {
-  const { getByText } = render(<Component>asddads</Component>);
-  expect(getByText("asddads")).toContain("asddads");
+const user = userEvent.setup();
+
+it("클릭 시 onClick 함수가 호출되는지", async () => {
+  const buttonText = "buttonText";
+  const spy = vi.fn();
+  render(<Target onClick={spy}>{buttonText}</Target>);
+  const target = screen.getByText<HTMLButtonElement>(buttonText);
+  await user.click(target);
+  expect(spy).toBeCalled();
 });

@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import React, { forwardRef, HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 import Element, { PropsWithAsChildren } from "@/components/atoms/Element";
 
@@ -19,7 +19,7 @@ const Error = forwardRef<
     <Default
       ref={ref}
       as={as}
-      className={classNames("text-red-500", className)}
+      className={twMerge("text-red-500", className)}
       {...rest}
     />
   );

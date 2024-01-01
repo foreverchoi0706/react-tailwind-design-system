@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef } from "react";
+import React, { InputHTMLAttributes, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 const Input = forwardRef<
